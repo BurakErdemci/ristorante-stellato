@@ -12,7 +12,7 @@
 
 Michelin yıldızlı İtalyan restoranı için tasarlanmış, interaktif masa seçimi ve gelişmiş yönetim paneli içeren profesyonel rezervasyon platformu.
 
-[🌐 Canlı Demo](https://ristorante-stellato-puum.vercel.app) • [📸 Screenshots](#-özellikler) • [🚀 Kurulum](#-kurulum)
+[🌐 Canlı Demo](https://ristorante-stellato-puum.vercel.app) • [📸 Screenshots](./screenshots.md) • [🚀 Kurulum](#-kurulum)
 
 </div>
 
