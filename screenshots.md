@@ -1,49 +1,55 @@
 Genel Sayfa:
 
 
-![alt text](Mainpage1.png)
+![alt text](Photos/Mainpage1.png)
 
 
 
-![alt text](Mainpage2.png)
 
 
 
-![alt text](MainpageMenu.png)
+![alt text](Photos/Mainpage2.png)
 
 
 
-![alt text](MainpageExperience.png)
+
+
+![alt text](Photos/MainpageMenu.png)
+
+
+
+
+![alt text](Photos/MainpageExperience.png)
 
 
 
 
 Rezervaryasyon kısmı:
 
-![alt text](ReservationPage1.png)
+![alt text](Photos/ReservationPage1.png)
 
 
 
-![alt text](ResarvationPage2.png)
+
+![alt text](Photos/ResarvationPage2.png)
 
 
 
-![alt text](Resarvationpage3.png)
+![alt text](Photos/Resarvationpage3.png)
 
 
 
-![alt text](ReservationPage4.png)
+
+![alt text](Photos/ReservationPage4.png)
 
 
 
-![alt text](ResarvationPage5.png)
-
-
+![alt text](Photos/ResarvationPage5.png)
 
 
 
 Admin Paneli:
 
 
-![alt text](Adminpage.png)
+![alt text](Photos/Adminpage.png)
 
