@@ -423,8 +423,8 @@ Bu proje [MIT](LICENSE) lisansı altında lisanslanmıştır.
 **Burak Emre Erdemci**
 
 - GitHub: [@BurakErdemci](https://github.com/BurakErdemci)
-- LinkedIn: [Burak Erdemci](https://linkedin.com/in/burak-erdemci)
-- Email: burak.erdemci@example.com
+- LinkedIn: [Burak Erdemci](https://www.linkedin.com/in/burak-erdemci-a3994833b)
+- Email: erdemciburakemre@gmail.com
 
 **Proje Linki**: [https://github.com/BurakErdemci/ristorante-stellato](https://github.com/BurakErdemci/ristorante-stellato)
 
