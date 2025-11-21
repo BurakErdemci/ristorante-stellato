@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+@theme {
+  /* --- RENKLER (Componentlerle Eşitlendi) --- */
+  /* Tasarımda kullandığım derin siyah ve özel altın rengi */
+  --color-stellato-black: #050505; 
+  --color-stellato-dark-green: #0a1f1c;
+  --color-stellato-cream: #f4f4f4;
+  --color-stellato-gold: #D4AF37;
+  --color-panel: #121212;
+
+  /* --- FONTLAR (Layout.js ile Bağlantı) --- */
+  /* Next.js'den gelen CSS değişkenlerini burada Tailwind'e bağlıyoruz */
+  --font-serif: var(--font-cormorant), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* --- BASE STYLES --- */
+
+/* Varsayılan ayarlar */
+body {
+  background-color: var(--color-stellato-black);
+  color: var(--color-stellato-cream);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; /* Yatay taşmaları engeller */
+}
+
+/* Başlıkların otomatik serif olması için */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+}
+
+/* --- PREMIUM DOKUNUŞLAR --- */
+
+/* Metin seçildiğinde çıkan renk (Lüks hissi için çok önemli) */
+::selection {
+  background-color: var(--color-stellato-gold);
+  color: #000;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Özel Scrollbar Stili (Siyah & Gri) */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-stellato-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-stellato-gold); /* Hover'da altın rengi olsun */
+}
+/* --- CUSTOM DATEPICKER (PREMIUM DARK/GOLD THEME) --- */
+.react-datepicker {
+  background-color: #0a0a0a !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  font-family: var(--font-sans) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8) !important;
+}
+
+.react-datepicker__header {
+  background-color: #121212 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.react-datepicker__current-month, 
+.react-datepicker__day-name {
+  color: #D4AF37 !important; /* Başlıklar Altın */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.8rem !important;
+}
+
+.react-datepicker__day {
+  color: #a8a29e !important; /* Tarihler gri */
+}
+
+.react-datepicker__day:hover {
+  background-color: rgba(212, 175, 55, 0.2) !important;
+  color: #fff !important;
+}
+
+.react-datepicker__day--selected, 
+.react-datepicker__time-list-item--selected {
+  background-color: #D4AF37 !important; /* Seçili gün Altın */
+  color: #000 !important;
+  font-weight: bold !important;
+}
+
+.react-datepicker__day--keyboard-selected {
+  background-color: rgba(212, 175, 55, 0.5) !important;
+  color: #fff !important;
+}
+
+.react-datepicker__time-container {
+  border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.react-datepicker__time-container .react-datepicker__time {
+  background-color: #0a0a0a !important;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item {
+  color: #a8a29e !important;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item:hover {
+  background-color: rgba(212, 175, 55, 0.2) !important;
+  color: #fff !important;
+}
+
+/* Ok İşaretleri */
+.react-datepicker__navigation-icon::before {
+  border-color: #D4AF37 !important;
+}
+
+/* Input alanı özelleştirmesi */
+.custom-datepicker-input {
+  width: 100%;
+  background: transparent;
+  color: #e7e5e4;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding: 12px 0;
+  font-family: var(--font-sans);
+  font-weight: 300;
+  cursor: pointer;
+}
+.custom-datepicker-input:focus {
+  outline: none;
+  border-color: #D4AF37;
+}
