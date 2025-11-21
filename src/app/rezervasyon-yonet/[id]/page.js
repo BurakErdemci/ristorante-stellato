@@ -1,3 +1,6 @@
+export const dynamic = 'force-dynamic'; 
+
+
 import { getReservationById, cancelReservationByUser } from '@/actions/reservationActions';
 import Navbar from '@/components/Navbar';
 import { Calendar, Clock, Users, CheckCircle, XCircle, AlertTriangle } from 'lucide-react';

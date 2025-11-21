@@ -10,7 +10,7 @@ const DISHES = {
     { 
       id: 1, 
       name: 'Carpaccio di Manzo', 
-      price: '520₺', 
+      
       desc: 'İnce dilimlenmiş Wagyu bonfile, roka, 24 aylık parmesan, trüf yağı.', 
       image: 'https://cookingitalians.com/wp-content/uploads/2024/11/Carpaccio-di-Manzo.jpg',
       isChefChoice: true 
@@ -18,21 +18,21 @@ const DISHES = {
     { 
       id: 2, 
       name: 'Burrata Campana', 
-      price: '480₺', 
+      
       desc: 'Puglia bölgesinden taze burrata, organik domates konfit, fesleğen pesto.', 
       image: 'https://media-cdn.tripadvisor.com/media/photo-s/16/33/fa/5f/passata-di-pomodorini.jpg' 
     },
     { 
       id: 3, 
       name: 'Polpo Grigliato', 
-      price: '680₺', 
+     
       desc: 'Izgara ahtapot kolu, patates kreması, sote ıspanak, limonlu zeytinyağı.', 
       image: 'https://www.kikkoman.it/fileadmin/_processed_/0/3/csm_1235_recipe_page_grilled_octopus_with_ponzu_sauce_and_capers_Mobile_b3aefb518c.webp' 
     },
      { 
       id: 6, 
       name: 'Risotto Zafferano e Oro', 
-      price: '750₺', 
+      
       desc: 'Acquerello pirinci, İran safranı, yenilebilir 24K altın yaprak, kemik suyu.', 
       image: 'https://reportergourmet.com/upload/ricette/41/Riso-oro-e-zafferano-Coimbra.jpg' 
     },
@@ -42,14 +42,14 @@ const DISHES = {
     { 
       id: 4, 
       name: 'Tagliolini al Tartufo Nero', 
-      price: '890₺', 
+    
       desc: 'Şefin el yapımı taze makarnası, Umbria siyah trüf mantarı rendesi, tereyağı emülsiyonu.', 
       image: 'https://www.essenza.co.uk/wp-content/uploads/2020/01/Fettuccine-al-tartufo-bianco-768x576.jpg' 
     },
     { 
       id: 5, 
       name: 'Ravioli di Aragosta', 
-      price: '950₺', 
+       
       desc: 'Mavi ıstakoz dolgulu ravioli, karides bisque sos, frenk soğanı ve havyar dokunuşu.', 
       image: 'https://i0.wp.com/fornobistro.com/wp-content/uploads/sites/3/2024/04/Ravioli-di-Aragosta.jpg?ssl=1',
       isChefChoice: true
@@ -58,7 +58,7 @@ const DISHES = {
     { 
       id: 7, 
       name: 'Pappardelle al Cinghiale', 
-      price: '780₺', 
+      
       desc: 'Geniş şerit makarna, 12 saat pişmiş yaban domuzu ragu, ardıç meyvesi aroması.', 
       image: 'https://www.casapappagallo.it/storage/11740/pappardelle-al-sugo-di-cinghiale.jpg' 
     }
@@ -67,7 +67,7 @@ const DISHES = {
     { 
       id: 8, 
       name: 'Tartufo e Burrata', 
-      price: '720₺', 
+    
       desc: 'Siyah trüf kreması tabanı, fior di latte, pişim sonrası taze burrata ve trüf dilimleri.', 
       image: 'https://media-cdn.tripadvisor.com/media/photo-s/1d/02/bc/9a/pizza-fiordilatte-burrata.jpg',
       isChefChoice: true
@@ -75,21 +75,21 @@ const DISHES = {
     { 
       id: 9, 
       name: 'Bresaola e Fichi', 
-      price: '650₺', 
+    
       desc: 'Mozzarella, ince dilim Bresaola, karamelize incir, gorgonzola, ceviz.', 
       image: 'https://tb-static.uber.com/prod/image-proc/processed_images/a26f154aa8ab03a83a40015c5faca15c/7f4ae9ca0446cbc23e71d8d395a98428.jpeg' 
     },
     { 
       id: 10, 
       name: 'Margherita Sbagliata', 
-      price: '450₺', 
+     
       desc: 'Deconstructed klasik: Sarı ve kırmızı kiraz domates konfit, manda mozzarellası.', 
       image: 'https://i.redd.it/first-attempt-of-margherita-sbagliata-from-n1-pizzeria-in-v0-4br9dr3ygan91.jpg?width=4032&format=pjpg&auto=webp&s=21d7d5ac52d454ec9c37fb446d6f73106a8ccb6b' 
     },
     { 
       id: 11, 
       name: 'Frutti di Mare Deluxe', 
-      price: '850₺', 
+       
       desc: 'San Marzano domates sos, karides, kalamar, midye, sarımsaklı maydanoz yağı.', 
       image: 'https://www.tasteatlas.com/images/dishes/2475b8aa94c1463dbe9dc17e0f38a063.jpg' 
     }
@@ -98,7 +98,7 @@ const DISHES = {
     { 
       id: 12, 
       name: 'Filetto alla Rossini', 
-      price: '1400₺', 
+       
       desc: 'Dana bonfile, tavada kaz ciğeri (foie gras), siyah trüf, Madeira şarap sosu.', 
       image: 'https://www.unadonna.it/wp-content/uploads/2018/04/filetto-alla-rossini.jpg',
       isChefChoice: true
@@ -106,14 +106,14 @@ const DISHES = {
     { 
       id: 13, 
       name: 'Branzino al Sale', 
-      price: '1250₺', 
+      
       desc: 'Tuz kabuğunda pişmiş deniz levreği, mevsim sebzeleri, limon sos.', 
       image: 'https://media-assets.lacucinaitaliana.it/photos/61fd3076a9db3736d06bc2f8/1:1/w_2560%2Cc_limit/Branzino-al-sale.jpg' 
     },
     { 
       id: 14, 
       name: 'Costolette di Agnello', 
-      price: '1150₺', 
+      
       desc: 'Kekik ve sarımsak marineli kuzu pirzola, patlıcan püresi.', 
       image: 'https://img.taste.com.au/q7vJvyXd/taste/2016/11/costolette-dyagnello-85950-1.jpeg' 
     }
@@ -122,7 +122,7 @@ const DISHES = {
     { 
       id: 15, 
       name: 'Tiramisu Stellato', 
-      price: '320₺', 
+      
       desc: 'Geleneksel tarif, mascarpone, espresso, savoiardi, Valrhona kakao.', 
       image: 'https://www.chefericette.com/wp-content/uploads/2022/01/Ricetta-stellata-Tirami-choux-chef-Fabrizio-Tesse.jpg',
       isChefChoice: true
@@ -130,7 +130,7 @@ const DISHES = {
     { 
       id: 16, 
       name: 'Cannoli Siciliani', 
-      price: '280₺', 
+     
       desc: 'Kıtır hamur, tatlı ricotta dolgusu, antep fıstığı ve portakal şekeri.', 
       image: 'https://www.cucchiaio.it/content/dam/cucchiaio/it/ricette/2015/11/cannoli-siciliani/Cannoli%20siciliani-1.jpg' 
     }

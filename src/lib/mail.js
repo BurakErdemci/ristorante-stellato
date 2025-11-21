@@ -1,10 +1,11 @@
 import nodemailer from 'nodemailer';
 
-
+// ✅ OPTİMİZASYON: Port 587 ve verify işleminin kaldırılması
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
-  port: 465,
-  secure: true, // SSL kullanımı
+  port: 587, // 465 yerine 587 (Vercel'de daha hızlı handshake yapar)
+  secure: false, // 587 için false olmalı
+  requireTLS: true, // Ancak güvenlik için TLS'i zorluyoruz
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
@@ -12,7 +13,7 @@ const transporter = nodemailer.createTransport({
 });
 
 export async function sendReservationEmail(to, name, date, time, guests, reservationId) {
-  // Yönetim Linki
+  // Link
   const manageLink = `${process.env.NEXT_PUBLIC_BASE_URL}/rezervasyon-yonet/${reservationId}`;
 
   const htmlContent = `
@@ -20,24 +21,18 @@ export async function sendReservationEmail(to, name, date, time, guests, reserva
       <div style="padding: 20px; text-align: center; border-bottom: 1px solid #333;">
         <h1 style="color: #D4AF37; margin: 0;">RISTORANTE STELLATO</h1>
       </div>
-      
       <div style="padding: 30px;">
         <h2 style="color: #D4AF37;">Sayın ${name},</h2>
-        <p>Rezervasyonunuz başarıyla oluşturuldu. Sizi ağırlamaktan mutluluk duyacağız.</p>
-        
+        <p>Rezervasyonunuz başarıyla oluşturuldu.</p>
         <div style="background-color: #111; padding: 15px; border-left: 4px solid #D4AF37; margin: 20px 0;">
-          <p style="margin: 5px 0;"><strong>Tarih:</strong> ${new Date(date).toLocaleDateString('tr-TR')}</p>
-          <p style="margin: 5px 0;"><strong>Saat:</strong> ${time}</p>
-          <p style="margin: 5px 0;"><strong>Kişi Sayısı:</strong> ${guests}</p>
+          <p><strong>Tarih:</strong> ${new Date(date).toLocaleDateString('tr-TR')}</p>
+          <p><strong>Saat:</strong> ${time}</p>
+          <p><strong>Kişi:</strong> ${guests}</p>
         </div>
-
-        <p>Planlarınız değişirse aşağıdaki linkten rezervasyonunuzu yönetebilirsiniz:</p>
-        
         <a href="${manageLink}" style="display: inline-block; background-color: #D4AF37; color: #000; padding: 12px 24px; text-decoration: none; font-weight: bold; border-radius: 4px; margin-top: 10px;">
-          Rezervasyonu Yönet / İptal Et
+          Yönet / İptal Et
         </a>
       </div>
-      
       <div style="padding: 20px; text-align: center; font-size: 12px; color: #666; border-top: 1px solid #333;">
         © 2025 Ristorante Stellato
       </div>
@@ -45,10 +40,11 @@ export async function sendReservationEmail(to, name, date, time, guests, reserva
   `;
 
   try {
+    // Verify (Test) kısmını kaldırdık, direkt gönderiyoruz.
     await transporter.sendMail({
       from: `"Ristorante Stellato" <${process.env.EMAIL_USER}>`,
       to: to,
-      subject: 'Rezervasyon Onayı ve Detaylar',
+      subject: 'Rezervasyon Onaylandı ✔️',
       html: htmlContent,
     });
     console.log('✅ Mail başarıyla gönderildi!');
