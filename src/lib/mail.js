@@ -1,7 +1,11 @@
+
 import nodemailer from 'nodemailer';
 
+
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp.gmail.com', // Host adresi
+  port: 465,              // Güvenli Port
+  secure: true,           // SSL Açık
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
@@ -9,7 +13,7 @@ const transporter = nodemailer.createTransport({
 });
 
 export async function sendReservationEmail(to, name, date, time, guests, reservationId) {
-  // Yönetim Linki (localhost:3000/rezervasyon-yonet/ID)
+  // Yönetim Linki
   const manageLink = `${process.env.NEXT_PUBLIC_BASE_URL}/rezervasyon-yonet/${reservationId}`;
 
   const htmlContent = `
@@ -48,8 +52,8 @@ export async function sendReservationEmail(to, name, date, time, guests, reserva
       subject: 'Rezervasyon Onayı ve Detaylar',
       html: htmlContent,
     });
-    console.log('Mail gönderildi!');
+    console.log('✅ Mail başarıyla gönderildi!');
   } catch (error) {
-    console.error('Mail hatası:', error);
+    console.error('❌ Mail gönderme hatası:', error);
   }
 }
