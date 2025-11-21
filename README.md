@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🍝 Ristorante Stellato | Ultra-Luxury Restaurant Reservation System
 
-## Getting Started
+![Next.js](https://img.shields.io/badge/Next.js-15-black) ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC) ![MongoDB](https://img.shields.io/badge/MongoDB-Database-green) ![License](https://img.shields.io/badge/License-MIT-yellow)
 
-First, run the development server:
+Ristorante Stellato, **Next.js 15** ve **Server Actions** kullanılarak geliştirilmiş, Michelin yıldızlı bir İtalyan restoranı için tasarlanmış **Full-Stack Rezervasyon Yönetim Sistemidir.**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+🔗 **Canlı Demo:** [https://ristorante-stellato.vercel.app](https://ristorante-stellato.vercel.app)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🌟 Öne Çıkan Özellikler
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 🔹 Müşteri Tarafı
+*   **İnteraktif Masa Seçimi:** Krokiler üzerinden görsel masa seçimi. Kapasite kontrolü (Örn: 4 kişilik grup, 2 kişilik masayı seçemez).
+*   **Adımlı (Multi-Step) Rezervasyon Formu:** Tarih, Saat, Masa ve İletişim bilgileriyle akıcı UX.
+*   **Premium Takvim & Zaman Yönetimi:** Geçmiş tarihleri ve dolu saatleri engelleyen akıllı sistem.
+*   **Hibrit Bildirim Sistemi:** Rezervasyon sonrası otomatik **E-Posta (Nodemailer)** gönderimi.
+*   **Rezervasyon Yönetimi:** Müşteriye özel link ile rezervasyon görüntüleme ve iptal etme imkanı.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🔹 Yönetim (Admin) Paneli
+*   **Dashboard:** Günlük rezervasyon, doluluk oranı ve bekleyen onay istatistikleri.
+*   **Gelişmiş Filtreleme:** Bekleyen, Onaylı, İptal durumuna göre sekmeli yapı.
+*   **Canlı Arama:** İsim, E-posta veya Masa numarasına göre anlık filtreleme.
+*   **Güvenli İşlemler:** Yanlışlıkla silmeyi önleyen özel onay modalları.
 
-## Learn More
+## 🛠️ Kullanılan Teknolojiler
 
-To learn more about Next.js, take a look at the following resources:
+*   **Framework:** Next.js 15 (App Router)
+*   **Dil:** JavaScript / React
+*   **Styling:** Tailwind CSS v4 & Framer Motion (Animasyonlar)
+*   **Database:** MongoDB & Mongoose
+*   **Validation:** Zod (Backend veri güvenliği için)
+*   **Mail Service:** Nodemailer (Gmail SMTP)
+*   **Icons:** Lucide React
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚀 Kurulum (Localhost)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Projeyi kendi bilgisayarınızda çalıştırmak için:
 
-## Deploy on Vercel
+1.  Projeyi klonlayın:
+    ```bash
+    git clone https://github.com/KULLANICI_ADI/ristorante-stellato.git
+    cd ristorante-stellato
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2.  Bağımlılıkları yükleyin:
+    ```bash
+    npm install
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3.  `.env` dosyasını oluşturun ve aşağıdaki bilgileri girin:
+    ```env
+    MONGODB_URI=your_mongodb_connection_string
+    EMAIL_USER=your_gmail_address
+    EMAIL_PASS=your_gmail_app_password
+    NEXT_PUBLIC_BASE_URL=http://localhost:3000
+    ```
+
+4.  Uygulamayı başlatın:
+    ```bash
+    npm run dev
+    ```
+
+## 📸 Ekran Görüntüleri
+
+
+
+---
+Bu proje **Burak Emre Erdemci** tarafından geliştirilmiştir.
