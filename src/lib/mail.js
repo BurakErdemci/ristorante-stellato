@@ -1,11 +1,7 @@
 import nodemailer from 'nodemailer';
 
-// ✅ OPTİMİZASYON: Port 587 ve verify işleminin kaldırılması
 const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 587, // 465 yerine 587 (Vercel'de daha hızlı handshake yapar)
-  secure: false, // 587 için false olmalı
-  requireTLS: true, // Ancak güvenlik için TLS'i zorluyoruz
+  service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
@@ -13,7 +9,6 @@ const transporter = nodemailer.createTransport({
 });
 
 export async function sendReservationEmail(to, name, date, time, guests, reservationId) {
-  // Link
   const manageLink = `${process.env.NEXT_PUBLIC_BASE_URL}/rezervasyon-yonet/${reservationId}`;
 
   const htmlContent = `
@@ -40,15 +35,15 @@ export async function sendReservationEmail(to, name, date, time, guests, reserva
   `;
 
   try {
-    // Verify (Test) kısmını kaldırdık, direkt gönderiyoruz.
     await transporter.sendMail({
       from: `"Ristorante Stellato" <${process.env.EMAIL_USER}>`,
       to: to,
-      subject: 'Rezervasyon Onaylandı ✔️',
+      subject: 'Rezervasyon Onayı',
       html: htmlContent,
     });
     console.log('✅ Mail başarıyla gönderildi!');
   } catch (error) {
     console.error('❌ Mail gönderme hatası:', error);
+ 
   }
 }

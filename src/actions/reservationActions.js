@@ -148,3 +148,34 @@ export async function cancelReservationByUser(id) {
     return { success: false, error: 'İptal işlemi başarısız.' };
   }
 }
+const newReservation = await Reservation.create(validated.data);
+    
+    // 2. MAİL GÖNDERME (Optimize Edildi)
+    const dateObj = new Date(validated.data.date);
+    const timeStr = dateObj.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
+
+    
+    try {
+    
+       const mailPromise = sendReservationEmail(
+          validated.data.email,
+          validated.data.name,
+          validated.data.date,
+          timeStr,
+          validated.data.guests,
+          newReservation._id.toString()
+       );
+       
+  
+       
+    } catch (err) {
+       console.log("Mail arka planda hata verdi ama işlem devam ediyor.");
+    }
+
+    revalidatePath('/admin');
+
+    return { 
+      success: true, 
+      message: 'Rezervasyon başarıyla alındı!', 
+      reservationId: newReservation._id.toString() 
+    };
