@@ -4,10 +4,9 @@ import dbConnect from '@/lib/db';
 import Reservation from '@/models/Reservation';
 import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
-// ✅ YENİ: Mail gönderme fonksiyonunu import ediyoruz
 import { sendReservationEmail } from '@/lib/mail';
 
-// Validasyon Şeması (Senin kodun aynen duruyor)
+// Validasyon Şeması
 const reservationSchema = z.object({
   name: z.string().min(2, "İsim en az 2 karakter olmalıdır."),
   email: z.string().email("Geçerli bir e-posta adresi giriniz."),
@@ -18,7 +17,6 @@ const reservationSchema = z.object({
   notes: z.string().optional().or(z.literal('')),
 });
 
-// ✅ createReservation
 export async function createReservation(prevState, formData) {
   try {
     await dbConnect();
@@ -33,6 +31,7 @@ export async function createReservation(prevState, formData) {
       tableId: formData.get('tableId'),
     };
 
+    // ✅ KRİTİK SATIR: Validasyon işlemini yapıyoruz
     const validated = reservationSchema.safeParse(rawData);
     
     if (!validated.success) {
@@ -45,27 +44,30 @@ export async function createReservation(prevState, formData) {
     // 1. Veritabanına Kayıt
     const newReservation = await Reservation.create(validated.data);
     
-    // 2. ✅ MAİL GÖNDERME İŞLEMİ (EKLENDİ)
-    // Tarih objesinden saati ayırıyoruz
-    const dateObj = new Date(validated.data.date);
-    const timeStr = dateObj.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
+    // 2. Mail Gönderme (Fire-and-Forget / Arka Planda)
+    // Try-catch içine alıyoruz ki mail gitmezse bile rezervasyon iptal olmasın.
+    try {
+      const dateObj = new Date(validated.data.date);
+      const timeStr = dateObj.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
 
-    // Mail fonksiyonunu çağırıyoruz
-    // await kullanmıyoruz ki kullanıcı beklemek zorunda kalmasın (Hız için)
-    sendReservationEmail(
-      validated.data.email,
-      validated.data.name,
-      validated.data.date,
-      timeStr,
-      validated.data.guests,
-      newReservation._id.toString() // Yönetim linki için ID lazım
-    );
+      // await KULLANMIYORUZ (Hız için)
+      sendReservationEmail(
+        validated.data.email,
+        validated.data.name,
+        validated.data.date,
+        timeStr,
+        validated.data.guests,
+        newReservation._id.toString()
+      );
+    } catch (mailError) {
+      console.error("Mail gönderme hatası (Kritik değil):", mailError);
+    }
 
     revalidatePath('/admin');
 
     return { 
       success: true, 
-      message: 'Rezervasyon başarıyla alındı ve bilgilendirme e-postası gönderildi.',
+      message: 'Rezervasyon başarıyla alındı!',
       reservationId: newReservation._id.toString() 
     };
 
@@ -75,7 +77,7 @@ export async function createReservation(prevState, formData) {
   }
 }
 
-// --- MEVCUT FONKSİYONLAR (AYNEN DURUYOR) ---
+// --- DİĞER FONKSİYONLAR ---
 
 export async function getReservations() {
   try {
@@ -123,9 +125,7 @@ export async function getReservedTables(dateStr, timeStr) {
   }
 }
 
-// --- ✅ YENİ EKLENENLER (YÖNETİM SAYFASI İÇİN) ---
-
-// ID ile tek bir rezervasyonu getirir (Müşteri detay sayfası için)
+// ID ile Tek Rezervasyon Getir (Yönetim Sayfası İçin)
 export async function getReservationById(id) {
   try {
     await dbConnect();
@@ -137,45 +137,14 @@ export async function getReservationById(id) {
   }
 }
 
-// Müşterinin kendi rezervasyonunu iptal etmesini sağlar
+// Kullanıcı İptal Fonksiyonu
 export async function cancelReservationByUser(id) {
   try {
     await dbConnect();
     await Reservation.findByIdAndUpdate(id, { status: 'cancelled' });
-    revalidatePath('/admin'); // Admin de güncel durumu görsün
+    revalidatePath('/admin');
     return { success: true };
   } catch (error) {
     return { success: false, error: 'İptal işlemi başarısız.' };
   }
 }
-const newReservation = await Reservation.create(validated.data);
-    
-    // 2. MAİL GÖNDERME (Optimize Edildi)
-    const dateObj = new Date(validated.data.date);
-    const timeStr = dateObj.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
-
-    
-    try {
-    
-       const mailPromise = sendReservationEmail(
-          validated.data.email,
-          validated.data.name,
-          validated.data.date,
-          timeStr,
-          validated.data.guests,
-          newReservation._id.toString()
-       );
-       
-  
-       
-    } catch (err) {
-       console.log("Mail arka planda hata verdi ama işlem devam ediyor.");
-    }
-
-    revalidatePath('/admin');
-
-    return { 
-      success: true, 
-      message: 'Rezervasyon başarıyla alındı!', 
-      reservationId: newReservation._id.toString() 
-    };
