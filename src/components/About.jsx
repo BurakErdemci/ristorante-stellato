@@ -30,7 +30,7 @@ export default function About() {
                 <img 
                   src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?q=80&w=1000&auto=format&fit=crop" 
                   alt="Chef Giovanni Rossi" 
-                  // DÜZELTME 1: grayscale-0 (mobilde renkli), md:grayscale (masaüstünde siyah-beyaz başla)
+                  // grayscale-0 (mobilde renkli), md:grayscale (masaüstünde siyah-beyaz başla)
                   className="w-full h-[500px] lg:h-[600px] object-cover grayscale-0 md:grayscale filter transition-all duration-1000 md:group-hover:grayscale-0 md:group-hover:scale-105"
                 />
                 
@@ -75,7 +75,7 @@ export default function About() {
                 </p>
               </div>
 
-              {/* DÜZELTME 2: İMZA & ÖDÜL ALANI (MOBİL İÇİN FLEX-COL) */}
+              {/* İMZA & ÖDÜL ALANI (MOBİL İÇİN FLEX-COL) */}
               <div className="mt-12 flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-8 border-t border-white/10 pt-8">
                 
                 {/* İmza */}

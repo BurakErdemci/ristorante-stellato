@@ -1,7 +1,7 @@
 import { Cormorant_Garamond, Montserrat } from "next/font/google";
 import "./globals.css";
 
-// 1. Lüks Başlık Fontu (Serif) - Cormorant, fine-dining için mükemmeldir.
+// 1. Lüks Başlık Fontu (Serif) 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-cormorant",
@@ -25,10 +25,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="tr" className="scroll-smooth">
-      <body
-        // bg-[#050505] ile component arkaplanlarını eşitledik.
-        // selection:... ile kullanıcı metni seçtiğinde altın rengi yanmasını sağladık.
-        className={`${cormorant.variable} ${montserrat.variable} antialiased bg-stellato-black text-stone-300 selection:bg-stellato-gold selection:text-black overflow-x-hidden`}
+      <body className={`${cormorant.variable} ${montserrat.variable} antialiased bg-stellato-black text-stone-300 selection:bg-stellato-gold selection:text-black overflow-x-hidden`}
       >
         {children}
       </body>

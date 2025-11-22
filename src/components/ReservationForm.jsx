@@ -20,7 +20,6 @@ export default function ReservationForm() {
   const [error, setError] = useState("");
   const [occupiedTables, setOccupiedTables] = useState([]);
   
-  // YENİ: Grup uyarısı için state
   const [showGroupModal, setShowGroupModal] = useState(false);
   
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -178,7 +177,6 @@ export default function ReservationForm() {
                     name="guests"
                     value={formData.guests}
                     onChange={(e) => {
-                        // Browser Alert yerine Modal State'ini açıyoruz
                         if(e.target.value === "7+") {
                             setShowGroupModal(true);
                             return;

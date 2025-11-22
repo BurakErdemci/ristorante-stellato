@@ -27,7 +27,7 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
   
-  // Arka plan resmi yazıdan daha yavaş kayacak (Parallax)
+
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
@@ -61,7 +61,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
         >
-       {/* Yıldızlar - ARTIK DAHA BÜYÜK VE MİCHELİN FORMUNDA */}
+       {/* Yıldızlar */}
     <div className="flex justify-center items-center gap-4 mb-8">
      {[1, 2, 3].map((i) => (
     <motion.div
@@ -78,7 +78,7 @@ export default function Hero() {
   ))}
 </div>
 
-{/* Üst Etiket - BURAYI GÜNCELLEDİK */}
+{/* Üst Etiket */}
 <motion.div 
   initial={{ opacity: 0, y: 20 }}
   animate={{ opacity: 1, y: 0 }}

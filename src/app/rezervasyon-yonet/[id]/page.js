@@ -6,16 +6,13 @@ import Navbar from '@/components/Navbar';
 import { Calendar, Clock, Users, CheckCircle, XCircle, AlertTriangle } from 'lucide-react';
 import { redirect } from 'next/navigation';
 
-// ✅ Params artık Promise olduğu için 'await' ile karşılıyoruz
-export default async function ManageReservationPage({ params }) {
-  
-  // 1. DÜZELTME BURADA: params'ı await ediyoruz
-  const { id } = await params; 
 
-  // ID ile veriyi çek
+export default async function ManageReservationPage({ params }) {
+
+  const { id } = await params; 
   const reservation = await getReservationById(id);
 
-  // Kayıt yoksa veya ID hatalıysa ana sayfaya at
+
   if (!reservation) {
     redirect('/');
   }
@@ -24,7 +21,6 @@ export default async function ManageReservationPage({ params }) {
   async function cancelAction() {
     "use server";
     await cancelReservationByUser(id);
-    // Sayfayı yenilemek yerine parametre ile yönlendirip durumu güncelleyelim
     redirect(`/rezervasyon-yonet/${id}?status=cancelled`);
   }
 

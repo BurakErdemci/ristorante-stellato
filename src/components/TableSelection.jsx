@@ -3,12 +3,12 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Users, Info } from 'lucide-react';
 
-// MASALARIN KAPASİTELERİNİ BURADA GÜNCELLEMEYİ UNUTMA
-// (Senin projendeki gerçek kapasiteler neyse onu yaz)
+// MASA KROKİ ŞEMASI
+
 const TABLES = [
   { id: 1, seats: 2, x: 12, y: 15, type: 'round', zone: 'Manzara' },
   { id: 2, seats: 2, x: 12, y: 35, type: 'round', zone: 'Manzara' },
-  { id: 3, seats: 4, x: 12, y: 55, type: 'round', zone: 'Manzara' },
+  { id: 3, seats: 4, x: 12, y: 55, type: 'rounSd', zone: 'Manzara' },
   { id: 4, seats: 4, x: 12, y: 75, type: 'round', zone: 'Manzara' },
   { id: 5, seats: 2, x: 35, y: 25, type: 'square', zone: 'Salon' },
   { id: 6, seats: 2, x: 35, y: 65, type: 'square', zone: 'Salon' },
@@ -21,7 +21,7 @@ const TABLES = [
   { id: 13, seats: 2, x: 35, y: 85, type: 'square', zone: 'Giriş' },
 ];
 
-// ✅ requiredSeats prop'unu ekledik
+
 export default function TableSelection({ occupiedTables = [], selectedTable, onSelect, requiredSeats = 1 }) {
   const [hoveredTable, setHoveredTable] = useState(null);
 
@@ -34,7 +34,6 @@ export default function TableSelection({ occupiedTables = [], selectedTable, onS
         <div className="flex gap-4 text-[10px] uppercase tracking-widest text-stone-400">
           <div className="flex items-center gap-2"><span className="w-3 h-3 bg-white/10 border border-white/30 rounded-sm"></span> Uygun</div>
           <div className="flex items-center gap-2"><span className="w-3 h-3 bg-stellato-gold rounded-sm shadow-[0_0_10px_#D4AF37]"></span> Seçili</div>
-          {/* Yeni Durum: Kapasite Yetersiz */}
           <div className="flex items-center gap-2"><span className="w-3 h-3 bg-transparent border border-white/10 opacity-20 rounded-sm"></span> Küçük</div>
           <div className="flex items-center gap-2"><span className="w-3 h-3 bg-white/5 opacity-30 rounded-sm"></span> Dolu</div>
         </div>
@@ -43,14 +42,14 @@ export default function TableSelection({ occupiedTables = [], selectedTable, onS
       {/* KROKİ ALANI */}
       <div className="relative w-full aspect-16/10 bg-stellato-black border border-white/10 rounded-xl shadow-2xl overflow-hidden group">
         
-        {/* ... (Giriş, Bar, Mutfak detayları buraya aynen gelecek, kod kısalığı için atladım) ... */}
+
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
 
         {/* MASALAR */}
         {TABLES.map((table) => {
           const isOccupied = occupiedTables.includes(table.id);
           const isSelected = selectedTable === table.id;
-          // ✅ KAPASİTE KONTROLÜ: Eğer masa kapasitesi, seçilen kişi sayısından küçükse
+          //KAPASİTE KONTROLÜ: Eğer masa kapasitesi, seçilen kişi sayısından küçükse
           const isTooSmall = table.seats < requiredSeats;
           
           // Tıklanabilir mi? (Dolu değilse VE küçük değilse)
@@ -65,12 +64,12 @@ export default function TableSelection({ occupiedTables = [], selectedTable, onS
               key={table.id}
               onMouseEnter={() => setHoveredTable(table)}
               onMouseLeave={() => setHoveredTable(null)}
-              // ✅ Sadece tıklanabilirse işlem yap
+              // Sadece tıklanabilirse işlem yap
               onClick={() => isClickable && onSelect(table.id)}
               disabled={!isClickable}
               
               initial={{ scale: 0, opacity: 0 }}
-              // ✅ Küçük veya dolu masaları soluklaştır
+              // Küçük veya dolu masaları soluklaştır
               animate={{ scale: 1, opacity: isClickable ? 1 : 0.3 }}
               whileHover={isClickable ? { scale: 1.05 } : {}}
               whileTap={isClickable ? { scale: 0.95 } : {}}

@@ -290,9 +290,9 @@ export default function MenuSection() {
                     alt={selectedDish?.name}
                     
                     // --- SWIPE MANTIĞI BAŞLANGICI ---
-                    drag="x" // Sadece yatay sürüklemeye izin ver
-                    dragConstraints={{ left: 0, right: 0 }} // Bırakınca merkeze dönsün
-                    dragElastic={0.2} // Elastiklik hissi (Premium his)
+                    drag="x"
+                    dragConstraints={{ left: 0, right: 0 }}
+                    dragElastic={0.2} 
                     onDragEnd={(e, { offset, velocity }) => {
                       const swipe = swipePower(offset.x, velocity.x);
 
@@ -311,7 +311,7 @@ export default function MenuSection() {
                       x: { type: "spring", stiffness: 300, damping: 30 },
                       opacity: { duration: 0.2 }
                     }}
-                    className="w-full h-full object-cover touch-pan-y" // touch-pan-y: Mobilde dikey scroll'u engellemez
+                    className="w-full h-full object-cover touch-pan-y" 
                   />
                 </AnimatePresence>
                 
@@ -339,7 +339,7 @@ export default function MenuSection() {
                   </motion.p>
                 </div>
                 
-                {/* Görsel İpucu (Mobilde görünmez, PC'de hover ile) */}
+          
                 <div className="absolute top-4 right-4 text-white/30 text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                    &larr; Kaydır &rarr;
                 </div>

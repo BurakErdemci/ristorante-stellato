@@ -1,6 +1,5 @@
 "use client";
 import { useState } from 'react';
-// ✅ DÜZELTME: 'Clock' buraya eklendi
 import { Check, X, Trash2, Search, Filter, Calendar, Users, MessageSquare, AlertTriangle, Clock } from 'lucide-react';
 import { updateReservationStatus, deleteReservation } from '@/actions/reservationActions';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -53,7 +52,7 @@ export default function AdminReservations({ initialData }) {
   return (
     <div className="w-full relative">
       
-      {/* --- TOOLBAR (MOBİL UYUMLU) --- */}
+      {/* --- TOOLBAR  --- */}
       <div className="p-4 md:p-6 border-b border-white/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         
         {/* Tabs - Kaydırılabilir */}
@@ -84,7 +83,7 @@ export default function AdminReservations({ initialData }) {
         </div>
       </div>
 
-      {/* --- TABLO (KAYMA SORUNU DÜZELTİLMİŞ) --- */}
+      {/* --- TABLO --- */}
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
@@ -113,7 +112,7 @@ export default function AdminReservations({ initialData }) {
                     <div className="text-xs text-stone-500 font-mono">{res.phone}</div>
                   </td>
                   
-                  {/* Tarih (Clock hatası buradaydı) */}
+                  {/* Tarih  */}
                   <td className="p-5 text-xs text-stone-400">
                     <div className="flex items-center gap-1 mb-1">
                         <Calendar size={12} /> {new Date(res.date).toLocaleDateString('tr-TR')}
@@ -133,7 +132,7 @@ export default function AdminReservations({ initialData }) {
                     {getStatusBadge(res.status)}
                   </td>
                   
-                  {/* İşlemler (MOBİL DÜZELTMESİ DAHİL) */}
+                  {/* İşlemler */}
                   <td className="p-5 text-right">
                     <div className="flex items-center justify-end gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                         {loadingId === res._id ? <span className="text-xs text-stellato-gold animate-pulse">...</span> : (

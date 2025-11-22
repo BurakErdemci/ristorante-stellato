@@ -31,7 +31,7 @@ export async function createReservation(prevState, formData) {
       tableId: formData.get('tableId'),
     };
 
-    // ✅ KRİTİK SATIR: Validasyon işlemini yapıyoruz
+    
     const validated = reservationSchema.safeParse(rawData);
     
     if (!validated.success) {
@@ -41,16 +41,16 @@ export async function createReservation(prevState, formData) {
       };
     }
 
-    // 1. Veritabanına Kayıt
+    // Veritabanına Kayıt
     const newReservation = await Reservation.create(validated.data);
     
-    // 2. Mail Gönderme (Fire-and-Forget / Arka Planda)
-    // Try-catch içine alıyoruz ki mail gitmezse bile rezervasyon iptal olmasın.
+    // Mail Gönderme (Fire-and-Forget / Arka Planda)
+   
     try {
       const dateObj = new Date(validated.data.date);
       const timeStr = dateObj.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
 
-      // await KULLANMIYORUZ (Hız için)
+     
       sendReservationEmail(
         validated.data.email,
         validated.data.name,

@@ -1,9 +1,7 @@
 "use client";
 import { motion } from 'framer-motion';
-// Tie yerine Shirt ikonunu import ettik, eğer Shirt de yoksa User kullanabilirsin.
 import { Info, ShieldCheck, Shirt, Clock, Phone } from 'lucide-react'; 
 import Navbar from '@/components/Navbar';
-// Senin var olan, çalışan ve MongoDB'ye bağlı formunu aynen çağırıyoruz
 import ReservationForm from '@/components/ReservationForm';
 
 export default function ReservationPage() {
@@ -55,7 +53,7 @@ export default function ReservationPage() {
         {/* --- GRİD LAYOUT --- */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
           
-          {/* SOL: SENİN ÇALIŞAN REZERVASYON FORMUN */}
+          {/* SOL: REZERVASYON FORMU */}
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -65,8 +63,6 @@ export default function ReservationPage() {
             <div className="bg-[#0a0a0a] border border-white/10 p-6 md:p-10 rounded-sm shadow-2xl relative overflow-hidden">
                {/* Üst Işık Efekti */}
                <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-stellato-gold/50 to-transparent opacity-50"></div>
-               
-               {/* BURASI SENİN MEVCUT COMPONENTİN - BACKEND MANTIĞI BURADA ÇALIŞIYOR */}
                <ReservationForm />
             </div>
           </motion.div>
@@ -87,7 +83,6 @@ export default function ReservationPage() {
               </h3>
               <ul className="space-y-5 text-sm text-stone-400 font-light leading-relaxed">
                 <li className="flex gap-3">
-                  {/* Hata veren Tie yerine Shirt kullandık */}
                   <Shirt size={18} className="text-stellato-gold shrink-0 mt-0.5" />
                   <span>
                     <strong className="text-white block mb-1">Kıyafet Kodu</strong>

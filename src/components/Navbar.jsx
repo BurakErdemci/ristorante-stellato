@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation'; // ✅ YENİ EKLENDİ: Sayfa kontrolü için
+import { usePathname } from 'next/navigation'; 
 
 const NAV_LINKS = [
   { name: 'Ana Sayfa', href: '#home' },
@@ -17,7 +17,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
-  // ✅ YENİ: Hangi sayfada olduğumuzu anlıyoruz
+
   const pathname = usePathname(); 
   const isHomePage = pathname === '/';
 
@@ -31,8 +31,8 @@ export default function Navbar() {
     <>
       <header
         className={`fixed top-0 w-full z-50 transition-all duration-700 ease-in-out border-b ${
-          scrolled || !isHomePage // ✅ GÜNCELLEME: Ana sayfa değilse de arka plan dolu olsun (Admin/Rezervasyon'da yazı okunabilsin diye)
-            ? "bg-[#050505]/90 backdrop-blur-md py-4 border-white/5 shadow-2xl"
+          scrolled || !isHomePage 
+            ? "bg-stellato-black/90 backdrop-blur-md py-4 border-white/5 shadow-2xl"
             : "bg-transparent border-transparent"
         }`}
       >
@@ -52,9 +52,6 @@ export default function Navbar() {
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.name}
-                // ✅ KRİTİK DÜZELTME: 
-                // Ana sayfadaysak direkt id'ye git (#menu), 
-                // Değilse ana sayfaya yönlendirip id'ye git (/#menu)
                 href={isHomePage ? link.href : `/${link.href}`}
                 className="relative group py-2"
               >
@@ -106,7 +103,7 @@ export default function Navbar() {
                   transition={{ delay: 0.1 + i * 0.1, duration: 0.5 }}
                 >
                   <Link
-                    // ✅ MOBİL İÇİN DE AYNI DÜZELTME
+                    
                     href={isHomePage ? link.href : `/${link.href}`}
                     onClick={() => setMobileMenuOpen(false)}
                     className="font-serif text-4xl md:text-5xl text-stone-300 hover:text-stellato-gold hover:italic transition-all duration-300"

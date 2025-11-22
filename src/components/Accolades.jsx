@@ -26,7 +26,7 @@ export default function Accolades() {
               className="flex flex-col items-center text-center group cursor-default"
             >
               <div className="flex items-center gap-2 text-stellato-black">
-                {/* İkon yerine SVG Michelin kullanılabilir ama burada text hiyerarşisi önemli */}
+    
                 <span className="text-xl font-serif font-bold">{award.icon}</span>
                 <span className="font-serif font-bold text-sm md:text-base tracking-widest text-stellato-black">
                   {award.text}

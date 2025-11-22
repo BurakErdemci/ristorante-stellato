@@ -3,19 +3,18 @@ import { motion } from 'framer-motion';
 import { Instagram, ArrowUpRight } from 'lucide-react';
 
 // Görseller ve Grid Düzeni Ayarları
-// colSpan ve rowSpan ile "Bento Grid" yapısı kuruyoruz.
 const GALLERY_ITEMS = [
   {
     src: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1200&auto=format&fit=crop",
     alt: "Signature Cocktails",
     title: "İmza Kokteyller",
-    className: "md:col-span-2 md:row-span-1" // Geniş
+    className: "md:col-span-2 md:row-span-1" 
   },
   {
     src: "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=800&auto=format&fit=crop",
     alt: "Interior Ambience",
     title: "Ana Salon",
-    className: "md:col-span-1 md:row-span-2" // Uzun (Dikey)
+    className: "md:col-span-1 md:row-span-2" 
   },
   {
    
@@ -36,7 +35,7 @@ const GALLERY_ITEMS = [
     src: "https://images.unsplash.com/photo-1592861956120-e524fc739696?q=80&w=1200&auto=format&fit=crop",
     alt: "Private Dining",
     title: "Özel Davetler",
-    className: "md:col-span-2 md:row-span-1" // Geniş
+    className: "md:col-span-2 md:row-span-1" 
   },
 ];
 

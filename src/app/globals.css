@@ -1,16 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  /* --- RENKLER (Componentlerle Eşitlendi) --- */
-  /* Tasarımda kullandığım derin siyah ve özel altın rengi */
+  /* --- RENKLER  --- */
   --color-stellato-black: #050505; 
   --color-stellato-dark-green: #0a1f1c;
   --color-stellato-cream: #f4f4f4;
   --color-stellato-gold: #D4AF37;
   --color-panel: #121212;
 
-  /* --- FONTLAR (Layout.js ile Bağlantı) --- */
-  /* Next.js'den gelen CSS değişkenlerini burada Tailwind'e bağlıyoruz */
+  /* --- FONTLAR --- */
   --font-serif: var(--font-cormorant), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
 }
@@ -23,17 +21,17 @@ body {
   color: var(--color-stellato-cream);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden; /* Yatay taşmaları engeller */
+  overflow-x: hidden; 
 }
 
-/* Başlıkların otomatik serif olması için */
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
 }
 
 /* --- PREMIUM DOKUNUŞLAR --- */
 
-/* Metin seçildiğinde çıkan renk (Lüks hissi için çok önemli) */
+
 ::selection {
   background-color: var(--color-stellato-gold);
   color: #000;
@@ -43,7 +41,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Özel Scrollbar Stili (Siyah & Gri) */
+
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -58,7 +56,7 @@ html {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-stellato-gold); /* Hover'da altın rengi olsun */
+  background: var(--color-stellato-gold); 
 }
 /* --- CUSTOM DATEPICKER (PREMIUM DARK/GOLD THEME) --- */
 .react-datepicker {
@@ -75,14 +73,14 @@ html {
 
 .react-datepicker__current-month, 
 .react-datepicker__day-name {
-  color: #D4AF37 !important; /* Başlıklar Altın */
+  color: #D4AF37 !important; 
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 0.8rem !important;
 }
 
 .react-datepicker__day {
-  color: #a8a29e !important; /* Tarihler gri */
+  color: #a8a29e !important; 
 }
 
 .react-datepicker__day:hover {
@@ -92,7 +90,7 @@ html {
 
 .react-datepicker__day--selected, 
 .react-datepicker__time-list-item--selected {
-  background-color: #D4AF37 !important; /* Seçili gün Altın */
+  background-color: #D4AF37 !important; 
   color: #000 !important;
   font-weight: bold !important;
 }

@@ -1,6 +1,6 @@
 import { getReservations } from '@/actions/reservationActions';
 import Navbar from '@/components/Navbar';
-import AdminReservations from '@/components/AdminReservations'; // ✅ DOĞRU IMPORT BU OLMALI
+import AdminReservations from '@/components/AdminReservations'; 
 import { Users, Clock, CheckCircle, AlertCircle } from 'lucide-react';
 
 export const metadata = {
@@ -21,12 +21,12 @@ const StatCard = ({ title, value, icon: Icon, color }) => (
 );
 
 export default async function AdminPage() {
-  // Verileri sunucuda çekiyoruz
+
   const { data: reservations = [] } = await getReservations();
 
   // İstatistikler
   const total = reservations.length;
-  const pending = reservations.filter(r => r.status === 'pending').length; // Bekleyenler (Default status yoksa pending kabul edelim)
+  const pending = reservations.filter(r => r.status === 'pending').length; 
   const confirmed = reservations.filter(r => r.status === 'confirmed').length;
   const totalGuests = reservations.reduce((acc, curr) => acc + Number(curr.guests || 0), 0);
 
@@ -60,8 +60,7 @@ export default async function AdminPage() {
 
         {/* Ana Tablo Alanı */}
         <div className="bg-[#0a0a0a] border border-white/10 rounded-xl overflow-hidden shadow-2xl">
-          
-          {/* 🛑 DİKKAT: BURADA "AdminReservations" OLMALI, "ReservationForm" DEĞİL */}
+        
           <AdminReservations initialData={reservations || []} />
           
         </div>
