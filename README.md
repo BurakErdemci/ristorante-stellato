@@ -347,14 +347,6 @@ Body: { id }
 }
 ```
 
-### İndeksler
-
-```javascript
-email: 1
-date: 1, time: 1
-uniqueToken: 1
-status: 1
-```
 
 ---
 
@@ -383,6 +375,10 @@ status: 1
 - [ ] Online ödeme (Stripe)
 - [ ] Customer loyalty program
 - [ ] Analytics dashboard
+
+### 🎯 Bilinen Problemler
+• E-posta bildirimleri local ortamda stabil çalışmaktadır, ancak Vercel’in serverless timeout kısıtlamaları nedeniyle canlı ortamda devre dışı bırakılmıştır.
+
 
 ---
 
@@ -435,7 +431,7 @@ Bu proje [MIT](LICENSE) lisansı altında lisanslanmıştır.
 Bu proje, modern web geliştirme pratiklerini öğrenmek ve gerçek dünya senaryolarını simüle etmek amacıyla geliştirilmiştir.
 
 **Özel teşekkürler:**
-- JavaScript kursu eğitmenlerim
+- JavaScript kursu eğitmenim Kaan hocam
 - Open source community
 - [Vercel](https://vercel.com) - Harika deployment platform
 - [MongoDB](https://mongodb.com) - Güvenilir database hosting
