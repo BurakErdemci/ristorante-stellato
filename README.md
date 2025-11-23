@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)
+![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)
 ![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react)
 ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)
@@ -38,7 +38,7 @@ Michelin yıldızlı İtalyan restoranı için tasarlanmış, interaktif masa se
 
 ## 🎯 Hakkında
 
-**Ristorante Stellato**, Next.js 15 ve Server Actions kullanılarak geliştirilmiş, gerçek dünya ihtiyaçlarına yönelik bir Full-Stack rezervasyon yönetim sistemidir. Proje, modern web geliştirme pratiklerini ve premium kullanıcı deneyimini bir araya getirerek hem müşterilere hem de restoran yönetimine kesintisiz bir deneyim sunar.
+**Ristorante Stellato**, Next.js 16 ve Server Actions kullanılarak geliştirilmiş, gerçek dünya ihtiyaçlarına yönelik bir Full-Stack rezervasyon yönetim sistemidir. Proje, modern web geliştirme pratiklerini ve premium kullanıcı deneyimini bir araya getirerek hem müşterilere hem de restoran yönetimine kesintisiz bir deneyim sunar.
 
 ### ⭐ Neden Bu Proje Özel?
 
@@ -104,7 +104,7 @@ Michelin yıldızlı İtalyan restoranı için tasarlanmış, interaktif masa se
 ## 🛠️ Teknoloji Stack
 
 ### Frontend
-- **Framework**: Next.js 15 (App Router)
+- **Framework**: Next.js 16 (App Router)
 - **Language**: JavaScript / React 18
 - **Styling**: Tailwind CSS v4
 - **Animations**: Framer Motion
@@ -258,7 +258,7 @@ ristorante-stellato/
 
 ## 🔌 API Endpoints
 
-### Server Actions (Next.js 15)
+### Server Actions (Next.js 16)
 
 ```javascript
 // Rezervasyon Oluşturma
