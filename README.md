@@ -496,7 +496,7 @@ npm run test:watch    # İzleme modunda çalıştırma
 | `npm run lint` | ESLint kontrolü |
 
 ### 🎯 Bilinen Problemler
-- E-posta bildirimleri local ortamda stabil çalışmaktadır, ancak Vercel’in serverless timeout kısıtlamaları nedeniyle canlı ortamda devre dışı bırakılmıştır.
+- E-posta bildirimleri için Resend kullanılmıştır. Free tier'da Resend de sadece kendi API key aldığın e-postana mail gelmektedir.
 
 
 ---
