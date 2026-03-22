@@ -3,9 +3,12 @@
 <div align="center">
 
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)
 ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)
+![NextAuth](https://img.shields.io/badge/NextAuth-v5-blueviolet?style=for-the-badge)
+![Vitest](https://img.shields.io/badge/Vitest-4.1-6E9F18?style=for-the-badge&logo=vitest&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Vercel-Deployed-000000?style=for-the-badge&logo=vercel)
 
 **Modern Full-Stack Rezervasyon Yönetim Sistemi**
@@ -29,6 +32,8 @@ Michelin yıldızlı İtalyan restoranı için tasarlanmış, interaktif masa se
 - [Environment Variables](#-environment-variables)
 - [API Endpoints](#-api-endpoints)
 - [Veritabanı Şeması](#-veritabanı-şeması)
+- [Authentication](#-authentication)
+- [Testing](#-testing)
 - [Roadmap](#-roadmap)
 - [Katkıda Bulunma](#-katkıda-bulunma)
 - [Lisans](#-lisans)
@@ -47,6 +52,11 @@ Michelin yıldızlı İtalyan restoranı için tasarlanmış, interaktif masa se
 - 🔄 **Real-time Validasyon**: Dolu saatleri ve geçmiş tarihleri engelleyen akıllı sistem
 - 📧 **Otomatik Bildirimler**: Email ile rezervasyon onayı ve müşteriye özel takip linki
 - 📊 **Güçlü Dashboard**: İstatistik, filtreleme ve canlı arama özellikleri
+- 🔐 **Güvenli Auth**: NextAuth v5 ile korunan admin paneli, gizli URL routing
+- 🌍 **Çoklu Dil**: Türkçe, İngilizce ve İtalyanca tam dil desteği (i18n)
+- 🎨 **Dark/Light Tema**: Göz yormayan sıcak krem tonlu açık tema ve premium koyu tema
+- 📱 **PWA Desteği**: Offline erişim, ana ekrana ekleme, service worker
+- 🛡️ **Rate Limiting**: IP tabanlı istek sınırlama ile spam koruması
 - 🚀 **Production Ready**: Vercel'de canlı, MongoDB Atlas ile güvenli veri yönetimi
 
 ---
@@ -83,7 +93,37 @@ Michelin yıldızlı İtalyan restoranı için tasarlanmış, interaktif masa se
 - Rezervasyon detayları (tarih, saat, masa, kişi sayısı)
 - Self-service iptal imkanı
 
+#### 5️⃣ Çoklu Dil Desteği (i18n)
+- **3 Dil**: Türkçe (varsayılan), İngilizce, İtalyanca
+- **Navbar'da dil seçici**: Bayrak ve isimli dropdown menü
+- **LocalStorage ile kalıcılık**: Seçilen dil hatırlanır
+- **Tam kapsam**: Tüm UI metinleri, menü açıklamaları, form etiketleri, hata mesajları
+- **Locale-aware tarih formatı**: Seçilen dile göre tarih/saat gösterimi
+
+#### 6️⃣ Dark/Light Tema
+- **Navbar'da tema toggle**: Tek tıkla geçiş
+- **Sıcak tonlar**: Açık tema göz yormayan krem/bej tonlarında
+- **Fotoğraflı sayfalar korunur**: Rezervasyon ve login sayfaları her zaman koyu kalır (`force-dark`)
+- **LocalStorage ile kalıcılık**: Tercih hatırlanır
+
+#### 7️⃣ PWA (Progressive Web App)
+- **Ana ekrana ekleme**: Mobilde native uygulama hissi
+- **Service Worker**: Statik asset'ler ve sayfalar offline cache'lenir
+- **Web App Manifest**: İkon, tema rengi ve splash screen yapılandırması
+
+#### 8️⃣ Rate Limiting
+- **IP tabanlı**: Sliding window algoritması ile istek sınırlama
+- **Rezervasyon koruması**: Spam form gönderimini engeller
+- **İptal koruması**: Kötü niyetli toplu iptal girişimlerini engeller
+- **Bağımsız**: Harici bağımlılık gerektirmez (in-memory Map)
+
 ### 🎛️ Admin Tarafı
+
+#### 🔐 Güvenli Erişim
+- **NextAuth v5** ile Credentials tabanlı kimlik doğrulama
+- **Gizli URL**: Admin paneli `/admin` yerine tahmin edilemez bir slug ile erişilir
+- **Middleware koruması**: Doğrudan `/admin` erişimi ana sayfaya yönlendirilir
+- **Session yönetimi**: Oturum açma/kapama, otomatik yönlendirme
 
 #### 📊 Dashboard İstatistikleri
 ```
@@ -104,19 +144,28 @@ Michelin yıldızlı İtalyan restoranı için tasarlanmış, interaktif masa se
 ## 🛠️ Teknoloji Stack
 
 ### Frontend
-- **Framework**: Next.js 16 (App Router)
-- **Language**: JavaScript / React 18
-- **Styling**: Tailwind CSS v4
+- **Framework**: Next.js 16 (App Router, React Compiler)
+- **Language**: TypeScript (strict mode)
+- **UI Library**: React 19.2
+- **Styling**: Tailwind CSS v4 (CSS custom properties ile tema sistemi)
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
-- **Form Handling**: React Hook Form + Zod
+- **Validation**: Zod 4
+- **i18n**: Custom React Context (TR/EN/IT — bağımlılık gerektirmez)
+- **PWA**: Service Worker + Web App Manifest
 
 ### Backend
 - **API**: Next.js Server Actions
-- **Database**: MongoDB
-- **ODM**: Mongoose
+- **Auth**: NextAuth v5 (Auth.js) — Credentials Provider
+- **Database**: MongoDB + Mongoose
 - **Validation**: Zod Schema
 - **Email**: Nodemailer (Gmail SMTP)
+
+### Testing
+- **Framework**: Vitest 4
+- **DOM**: jsdom
+- **Utilities**: React Testing Library
+- **Coverage**: Rezervasyon validasyonu, masa seçim mantığı, admin filtreleme
 
 ### DevOps
 - **Hosting**: Vercel
@@ -152,11 +201,15 @@ npm install
 
 ### 3. Environment Variables Ayarlayın
 
-`.env.local` dosyası oluşturun:
+`.env.example` dosyasını kopyalayın ve değerleri doldurun:
+
+```bash
+cp .env.example .env.local
+```
 
 ```env
 # MongoDB
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/ristorante
+MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/restaurant
 
 # Email Configuration (Gmail)
 EMAIL_USER=your-email@gmail.com
@@ -164,6 +217,14 @@ EMAIL_PASS=your-16-digit-app-password
 
 # Base URL
 NEXT_PUBLIC_BASE_URL=http://localhost:3000
+
+# NextAuth (secret oluşturmak için: openssl rand -base64 32)
+AUTH_SECRET=your-generated-secret
+ADMIN_EMAIL=admin@example.com
+ADMIN_PASSWORD=your-secure-password
+
+# Gizli admin panel yolu (tahmin edilemez bir slug belirleyin)
+NEXT_PUBLIC_ADMIN_ROUTE=your-secret-slug
 ```
 
 > 💡 **Gmail App Password Nasıl Alınır?**
@@ -172,7 +233,15 @@ NEXT_PUBLIC_BASE_URL=http://localhost:3000
 > 3. App Passwords bölümüne gidin
 > 4. Mail > Other seçin ve 16 haneli şifreyi alın
 
-### 4. Development Server'ı Başlatın
+### 4. Demo Verileri Yükleyin (Opsiyonel)
+
+```bash
+npm run seed
+```
+
+Bu komut MongoDB'ye 8 örnek rezervasyon ekler (farklı statüler, tarihler ve notlarla).
+
+### 5. Development Server'ı Başlatın
 
 ```bash
 npm run dev
@@ -180,7 +249,7 @@ npm run dev
 
 Tarayıcınızda açın: [http://localhost:3000](http://localhost:3000)
 
-### 5. Production Build (Opsiyonel)
+### 6. Production Build (Opsiyonel)
 
 ```bash
 npm run build
@@ -203,11 +272,14 @@ npm start
 
 ### Admin Panel Yönetimi
 
-1. Admin dashboard'a erişin: `/admin` (authentication eklendikten sonra)
-2. Bekleyen rezervasyonları görüntüleyin
-3. Filtreleme ve arama ile istediğiniz rezervasyonu bulun
-4. Rezervasyonu onayla/reddet/iptal et
-5. Sistem otomatik email bildirimi gönderir
+1. Gizli admin URL'ine gidin: `/{NEXT_PUBLIC_ADMIN_ROUTE}` (`.env.local`'de tanımlı)
+2. Admin e-posta ve şifresi ile giriş yapın
+3. Bekleyen rezervasyonları görüntüleyin
+4. Filtreleme ve arama ile istediğiniz rezervasyonu bulun
+5. Rezervasyonu onayla/reddet/iptal et
+6. Sağ üstteki "Çıkış Yap" butonu ile oturumu kapatın
+
+> ⚠️ `/admin` yazan kullanıcılar otomatik olarak ana sayfaya yönlendirilir. Admin paneline yalnızca gizli URL üzerinden erişilebilir.
 
 ---
 
@@ -215,31 +287,61 @@ npm start
 
 ```
 ristorante-stellato/
-├── app/
-│   ├── (routes)/
-│   │   ├── page.js              # Ana sayfa
-│   │   ├── reservation/         # Rezervasyon sayfaları
-│   │   └── admin/               # Admin dashboard
-│   ├── api/                     # API routes
-│   ├── actions/                 # Server Actions
-│   └── layout.js                # Root layout
-├── components/
-│   ├── ui/                      # UI componentleri
-│   ├── forms/                   # Form componentleri
-│   ├── admin/                   # Admin componentleri
-│   └── TableSelection.jsx       # İnteraktif masa seçimi
-├── lib/
-│   ├── mongodb.js               # Database connection
-│   ├── email.js                 # Email service
-│   └── utils.js                 # Yardımcı fonksiyonlar
-├── models/
-│   └── Reservation.js           # Mongoose schema
 ├── public/
-│   ├── images/                  # Görseller
-│   └── icons/                   # İkonlar
-├── .env.local                   # Environment variables
-├── next.config.js               # Next.js config
-├── tailwind.config.js           # Tailwind config
+│   ├── icons/                       # PWA ikonları (192x192, 512x512)
+│   ├── manifest.json                # PWA Web App Manifest
+│   └── sw.js                        # Service Worker (cache stratejisi)
+├── src/
+│   ├── app/
+│   │   ├── page.tsx                 # Ana sayfa
+│   │   ├── layout.tsx               # Root layout (ThemeProvider + LanguageProvider)
+│   │   ├── globals.css              # Tema değişkenleri (dark/light/force-dark)
+│   │   ├── rezervasyon/
+│   │   │   └── page.tsx             # Rezervasyon formu (force-dark)
+│   │   ├── rezervasyon-yonet/
+│   │   │   └── [id]/
+│   │   │       ├── page.tsx         # Server: veri çekme
+│   │   │       └── client.tsx       # Client: i18n destekli UI
+│   │   ├── admin/
+│   │   │   ├── page.tsx             # Server: veri çekme
+│   │   │   ├── client.tsx           # Client: i18n destekli dashboard
+│   │   │   └── login/page.tsx       # Admin giriş sayfası (force-dark)
+│   │   └── api/
+│   │       └── auth/[...nextauth]/  # NextAuth API routes
+│   ├── components/
+│   │   ├── Navbar.tsx               # Navigasyon + dil seçici + tema toggle
+│   │   ├── Hero.tsx                 # Hero section
+│   │   ├── MenuSection.tsx          # Menü galerisi (çevrilebilir yemek adları)
+│   │   ├── TableSelection.tsx       # İnteraktif masa seçimi
+│   │   ├── ReservationForm.tsx      # Multi-step form
+│   │   ├── AdminReservations.tsx    # Admin tablo yönetimi
+│   │   ├── AdminHeader.tsx          # Çıkış butonu
+│   │   ├── LanguageProvider.tsx     # i18n context (TR/EN/IT)
+│   │   ├── ThemeProvider.tsx        # Dark/Light tema context
+│   │   ├── ServiceWorkerRegister.tsx # PWA service worker kaydı
+│   │   └── ...                      # Diğer componentler
+│   ├── i18n/
+│   │   ├── tr.ts                    # Türkçe çeviriler (base type)
+│   │   ├── en.ts                    # İngilizce çeviriler
+│   │   ├── it.ts                    # İtalyanca çeviriler
+│   │   └── index.ts                 # Locale tanımları ve export
+│   ├── actions/
+│   │   └── reservationActions.ts    # Server Actions (CRUD + rate limit)
+│   ├── models/
+│   │   └── Reservation.ts          # Mongoose schema
+│   ├── lib/
+│   │   ├── db.ts                    # MongoDB bağlantısı
+│   │   ├── mail.ts                  # Email servisi
+│   │   └── rate-limit.ts           # IP tabanlı rate limiter
+│   ├── types/
+│   │   └── index.ts                 # TypeScript type tanımları
+│   ├── auth.ts                      # NextAuth v5 yapılandırması
+│   └── middleware.ts                # Route koruması & gizli URL rewrite
+├── scripts/
+│   └── seed.ts                      # Demo veri yükleme scripti
+├── .env.example                     # Örnek environment variables
+├── tsconfig.json                    # TypeScript yapılandırması
+├── vitest.config.ts                 # Vitest yapılandırması
 └── package.json
 ```
 
@@ -249,10 +351,14 @@ ristorante-stellato/
 
 | Değişken | Açıklama | Örnek |
 |----------|----------|-------|
-| `MONGODB_URI` | MongoDB bağlantı string'i | `mongodb+srv://...` |
+| `MONGO_URI` | MongoDB bağlantı string'i | `mongodb+srv://...` |
 | `EMAIL_USER` | Gmail hesap adresi | `example@gmail.com` |
 | `EMAIL_PASS` | Gmail App Password (16 haneli) | `abcd efgh ijkl mnop` |
 | `NEXT_PUBLIC_BASE_URL` | Uygulama base URL | `http://localhost:3000` |
+| `AUTH_SECRET` | NextAuth oturum şifreleme anahtarı | `openssl rand -base64 32` |
+| `ADMIN_EMAIL` | Admin giriş e-postası | `admin@example.com` |
+| `ADMIN_PASSWORD` | Admin giriş şifresi | `SecurePass123!` |
+| `NEXT_PUBLIC_ADMIN_ROUTE` | Gizli admin panel URL slug'ı | `gestione-x8k2m` |
 
 ---
 
@@ -260,24 +366,33 @@ ristorante-stellato/
 
 ### Server Actions (Next.js 16)
 
-```javascript
-// Rezervasyon Oluşturma
-POST /actions/createReservation
-Body: { name, email, phone, date, time, guests, tableNumber }
+```typescript
+// Rezervasyon Oluşturma (FormData ile)
+createReservation(prevState, formData) → ActionResult
 
-// Rezervasyon Getirme
-GET /actions/getReservation?token={uniqueToken}
+// Tüm Rezervasyonları Getirme (Admin)
+getReservations() → { success, data: Reservation[] }
 
-// Rezervasyon İptal Etme
-POST /actions/cancelReservation
-Body: { token }
+// Rezervasyon Durum Güncelleme
+updateReservationStatus(id, newStatus) → ActionResult
 
-// Admin - Tüm Rezervasyonları Getirme
-GET /actions/getAllReservations
+// Rezervasyon Silme
+deleteReservation(id) → ActionResult
 
-// Admin - Rezervasyon Onaylama
-POST /actions/confirmReservation
-Body: { id }
+// Dolu Masaları Sorgulama
+getReservedTables(dateStr, timeStr) → { success, occupiedTableIds }
+
+// Müşteri Tarafı Rezervasyon Görüntüleme
+getReservationById(id) → Reservation | null
+
+// Müşteri Tarafı Rezervasyon İptali
+cancelReservationByUser(id) → ActionResult
+```
+
+### Auth API (NextAuth v5)
+
+```
+GET/POST  /api/auth/[...nextauth]   # NextAuth handler (session, csrf, signin, signout)
 ```
 
 ---
@@ -286,67 +401,66 @@ Body: { id }
 
 ### Reservation Model
 
-```javascript
-{
-  _id: ObjectId,
-  name: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  email: {
-    type: String,
-    required: true,
-    lowercase: true
-  },
-  phone: {
-    type: String,
-    required: true
-  },
-  date: {
-    type: Date,
-    required: true
-  },
-  time: {
-    type: String,
-    required: true
-  },
-  guests: {
-    type: Number,
-    required: true,
-    min: 1,
-    max: 12
-  },
-  tableNumber: {
-    type: Number,
-    required: true
-  },
-  tableCapacity: {
-    type: Number,
-    required: true
-  },
-  status: {
-    type: String,
-    enum: ['pending', 'confirmed', 'cancelled'],
-    default: 'pending'
-  },
-  specialRequests: String,
-  uniqueToken: {
-    type: String,
-    unique: true,
-    required: true
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now
-  }
+```typescript
+interface IReservation {
+  name: string;          // Müşteri adı
+  email: string;         // E-posta
+  phone: string;         // Telefon
+  date: Date;            // Rezervasyon tarihi ve saati
+  guests: number;        // Kişi sayısı (1-10)
+  tableId: number;       // Masa numarası
+  status: 'pending' | 'confirmed' | 'cancelled';
+  notes?: string;        // Özel notlar
+  createdAt: Date;       // Oluşturulma tarihi
 }
 ```
 
+
+---
+
+## 🔐 Authentication
+
+Admin paneli **NextAuth v5 (Auth.js)** ile korunmaktadır.
+
+### Mimari
+
+- **Provider**: Credentials (e-posta + şifre, `.env` tabanlı)
+- **Middleware**: Tüm admin rotaları middleware seviyesinde korunur
+- **Gizli URL**: Admin paneli tahmin edilemez bir slug ile erişilir (`NEXT_PUBLIC_ADMIN_ROUTE`)
+- **Doğrudan engel**: `/admin` URL'ine erişim otomatik olarak ana sayfaya yönlendirir
+- **Internal rewrite**: Gizli URL, middleware tarafından fiziksel `/admin` sayfalarına rewrite edilir
+
+### Güvenlik Akışı
+
+```
+Kullanıcı /{gizli-slug} → Middleware → Giriş yapmış mı?
+                                          ├─ Evet → Rewrite → /admin (internal)
+                                          └─ Hayır → Redirect → /{gizli-slug}/login
+
+Kullanıcı /admin → Middleware → Redirect → / (ana sayfa)
+```
+
+---
+
+## 🧪 Testing
+
+Proje **Vitest** ile test edilmektedir. Toplam **53 test** 4 test dosyasında yer almaktadır.
+
+### Test Dosyaları
+
+| Dosya | Test Sayısı | Kapsam |
+|-------|-------------|--------|
+| `reservation-validation.test.ts` | 12 | Zod şema validasyonu (isim, email, telefon, kişi sayısı, masa seçimi) |
+| `table-selection.test.ts` | 20 | Masa verileri, kapasite filtreleme, doluluk kontrolü, tıklanabilirlik, bölge dağılımı |
+| `admin-filter.test.ts` | 16 | Durum filtreleri, arama (isim/email/masa), birleşik filtre+arama, durum geçişleri |
+| `rate-limit.test.ts` | 5 | Rate limiter sliding window, IP bazlı sınırlama, süre sonrası sıfırlama |
+
+### Testleri Çalıştırma
+
+```bash
+npm test              # Tek seferlik çalıştırma
+npm run test:watch    # İzleme modunda çalıştırma
+```
 
 ---
 
@@ -359,25 +473,30 @@ Body: { id }
 - [x] Admin dashboard
 - [x] MongoDB entegrasyonu
 - [x] Vercel deployment
+- [x] TypeScript migration (strict mode)
+- [x] Admin authentication (NextAuth v5)
+- [x] Gizli admin URL routing
+- [x] Seed script (demo veri)
+- [x] Unit testler (Vitest — 53 test)
+- [x] Rate limiting middleware (IP tabanlı sliding window)
+- [x] Dark/Light tema geçişi (CSS custom properties + ThemeProvider)
+- [x] PWA desteği (Service Worker, Web App Manifest, offline cache)
+- [x] Multi-language support (i18n — Türkçe/İngilizce/İtalyanca)
 
-### 🔄 Devam Eden
-- [ ] Admin authentication (NextAuth.js)
-- [ ] Rate limiting middleware
-- [ ] Unit & integration tests
-- [ ] API documentation (Swagger)
+### 📜 Mevcut Scriptler
 
-### 🎯 Planlanan
-- [ ] Rezervasyon güncelleme
-- [ ] Waiting list (bekleme listesi)
-- [ ] SMS bildirimleri (Twilio)
-- [ ] QR kod menü entegrasyonu
-- [ ] Multi-language support (i18n)
-- [ ] Online ödeme (Stripe)
-- [ ] Customer loyalty program
-- [ ] Analytics dashboard
+| Komut | Açıklama |
+|-------|----------|
+| `npm run dev` | Development server |
+| `npm run build` | Production build |
+| `npm start` | Production server |
+| `npm run seed` | Demo verileri MongoDB’ye yükle |
+| `npm test` | Unit testleri çalıştır |
+| `npm run test:watch` | Testleri izleme modunda çalıştır |
+| `npm run lint` | ESLint kontrolü |
 
 ### 🎯 Bilinen Problemler
-• E-posta bildirimleri local ortamda stabil çalışmaktadır, ancak Vercel’in serverless timeout kısıtlamaları nedeniyle canlı ortamda devre dışı bırakılmıştır.
+- E-posta bildirimleri local ortamda stabil çalışmaktadır, ancak Vercel’in serverless timeout kısıtlamaları nedeniyle canlı ortamda devre dışı bırakılmıştır.
 
 
 ---
@@ -431,13 +550,12 @@ Bu proje [MIT](LICENSE) lisansı altında lisanslanmıştır.
 Bu proje, modern web geliştirme pratiklerini öğrenmek ve gerçek dünya senaryolarını simüle etmek amacıyla geliştirilmiştir.
 
 **Özel teşekkürler:**
-- JavaScript kursu eğitmenim Kaan hocam
 - Open source community
 - [Vercel](https://vercel.com) - Harika deployment platform
 - [MongoDB](https://mongodb.com) - Güvenilir database hosting
 - [Lucide](https://lucide.dev) - Minimal icon seti
 
----
+
 
 <div align="center">
 

@@ -1,12 +1,49 @@
 @import "tailwindcss";
 
+/* --- TEMA DEĞİŞKENLERİ --- */
+:root {
+  --bg-main: #050505;
+  --bg-surface: #121212;
+  --bg-elevated: #0a0a0a;
+  --text-primary: #f4f4f4;
+  --text-secondary: #d6d3d1;
+  --text-muted: #a8a29e;
+  --accent-gold: #D4AF37;
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-faint: rgba(255, 255, 255, 0.05);
+  --overlay: rgba(255, 255, 255, 0.05);
+  --scrollbar-track: #050505;
+  --scrollbar-thumb: #333;
+}
+
+html.light {
+  --bg-main: #f0ebe4;
+  --bg-surface: #e8e2d9;
+  --bg-elevated: #ebe5dc;
+  --text-primary: #1c1917;
+  --text-secondary: #3d3730;
+  --text-muted: #6b6560;
+  --accent-gold: #B8960F;
+  --border-subtle: rgba(0, 0, 0, 0.12);
+  --border-faint: rgba(0, 0, 0, 0.06);
+  --overlay: rgba(0, 0, 0, 0.04);
+  --scrollbar-track: #f0ebe4;
+  --scrollbar-thumb: #c4bdb4;
+}
+
 @theme {
-  /* --- RENKLER  --- */
-  --color-stellato-black: #050505; 
+  /* --- RENKLER (tema-uyumlu) --- */
+  --color-stellato-black: var(--bg-main);
   --color-stellato-dark-green: #0a1f1c;
-  --color-stellato-cream: #f4f4f4;
-  --color-stellato-gold: #D4AF37;
-  --color-panel: #121212;
+  --color-stellato-cream: var(--text-primary);
+  --color-stellato-gold: var(--accent-gold);
+  --color-panel: var(--bg-surface);
+  --color-elevated: var(--bg-elevated);
+  --color-theme-secondary: var(--text-secondary);
+  --color-theme-muted: var(--text-muted);
+  --color-theme-border: var(--border-subtle);
+  --color-theme-border-faint: var(--border-faint);
+  --color-theme-overlay: var(--overlay);
 
   /* --- FONTLAR --- */
   --font-serif: var(--font-cormorant), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
@@ -15,15 +52,14 @@
 
 /* --- BASE STYLES --- */
 
-/* Varsayılan ayarlar */
 body {
-  background-color: var(--color-stellato-black);
-  color: var(--color-stellato-cream);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden; 
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
-
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
@@ -31,9 +67,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /* --- PREMIUM DOKUNUŞLAR --- */
 
-
 ::selection {
-  background-color: var(--color-stellato-gold);
+  background-color: var(--accent-gold);
   color: #000;
 }
 
@@ -41,93 +76,107 @@ html {
   scroll-behavior: smooth;
 }
 
-
 ::-webkit-scrollbar {
   width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-stellato-black);
+  background: var(--scrollbar-track);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
+  background: var(--scrollbar-thumb);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-stellato-gold); 
+  background: var(--accent-gold);
 }
-/* --- CUSTOM DATEPICKER (PREMIUM DARK/GOLD THEME) --- */
+
+/* --- FORCE DARK: fotoğraflı arka plan sayfaları her zaman koyu kalır --- */
+.force-dark {
+  --bg-main: #050505;
+  --bg-surface: #121212;
+  --bg-elevated: #0a0a0a;
+  --text-primary: #f4f4f4;
+  --text-secondary: #d6d3d1;
+  --text-muted: #a8a29e;
+  --accent-gold: #D4AF37;
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-faint: rgba(255, 255, 255, 0.05);
+  --overlay: rgba(255, 255, 255, 0.05);
+}
+
+/* --- CUSTOM DATEPICKER --- */
 .react-datepicker {
-  background-color: #0a0a0a !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background-color: var(--bg-elevated) !important;
+  border: 1px solid var(--border-subtle) !important;
   font-family: var(--font-sans) !important;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8) !important;
 }
 
 .react-datepicker__header {
-  background-color: #121212 !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  background-color: var(--bg-surface) !important;
+  border-bottom: 1px solid var(--border-faint) !important;
 }
 
-.react-datepicker__current-month, 
+.react-datepicker__current-month,
 .react-datepicker__day-name {
-  color: #D4AF37 !important; 
+  color: var(--accent-gold) !important;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 0.8rem !important;
 }
 
 .react-datepicker__day {
-  color: #a8a29e !important; 
+  color: var(--text-muted) !important;
 }
 
 .react-datepicker__day:hover {
   background-color: rgba(212, 175, 55, 0.2) !important;
-  color: #fff !important;
+  color: var(--text-primary) !important;
 }
 
-.react-datepicker__day--selected, 
+.react-datepicker__day--selected,
 .react-datepicker__time-list-item--selected {
-  background-color: #D4AF37 !important; 
+  background-color: var(--accent-gold) !important;
   color: #000 !important;
   font-weight: bold !important;
 }
 
 .react-datepicker__day--keyboard-selected {
   background-color: rgba(212, 175, 55, 0.5) !important;
-  color: #fff !important;
+  color: var(--text-primary) !important;
 }
 
 .react-datepicker__time-container {
-  border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-left: 1px solid var(--border-subtle) !important;
 }
 
 .react-datepicker__time-container .react-datepicker__time {
-  background-color: #0a0a0a !important;
+  background-color: var(--bg-elevated) !important;
 }
 
 .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item {
-  color: #a8a29e !important;
+  color: var(--text-muted) !important;
 }
 
 .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item:hover {
   background-color: rgba(212, 175, 55, 0.2) !important;
-  color: #fff !important;
+  color: var(--text-primary) !important;
 }
 
 /* Ok İşaretleri */
 .react-datepicker__navigation-icon::before {
-  border-color: #D4AF37 !important;
+  border-color: var(--accent-gold) !important;
 }
 
 /* Input alanı özelleştirmesi */
 .custom-datepicker-input {
   width: 100%;
   background: transparent;
-  color: #e7e5e4;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-subtle);
   padding: 12px 0;
   font-family: var(--font-sans);
   font-weight: 300;
@@ -135,5 +184,5 @@ html {
 }
 .custom-datepicker-input:focus {
   outline: none;
-  border-color: #D4AF37;
+  border-color: var(--accent-gold);
 }
