@@ -1,16 +1,8 @@
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
-
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 587,
-  secure: false,
-  requireTLS: true,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+function getResend() {
+  return new Resend(process.env.RESEND_API_KEY);
+}
 
 export async function sendReservationEmail(
   to: string,
@@ -47,10 +39,9 @@ export async function sendReservationEmail(
   `;
 
   try {
-
-    await transporter.sendMail({
-      from: `"Ristorante Stellato" <${process.env.EMAIL_USER}>`,
-      to: to,
+    await getResend().emails.send({
+      from: 'Ristorante Stellato <onboarding@resend.dev>',
+      to,
       subject: 'Rezervasyon Onayı ve Detaylar',
       html: htmlContent,
     });
