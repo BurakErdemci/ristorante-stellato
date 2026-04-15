@@ -1,3 +1,5 @@
+> 🇬🇧 [Read this README in English](./README_EN.md)
+
 # 🍝 Ristorante Stellato
 
 <div align="center">
