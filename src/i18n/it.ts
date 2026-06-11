@@ -315,7 +315,7 @@ const it: Translations = {
     title1: "Un viaggio",
     title2: "gastronomico",
     categoryLabel: "Categorie del menu",
-    tastingNote: "Menu degustazione · 9 portate · ₺4.800",
+    tastingNote: "Menu degustazione · 9 portate",
     wineNote: "Abbinamento vini · Selezione del sommelier",
   },
   cantina: {

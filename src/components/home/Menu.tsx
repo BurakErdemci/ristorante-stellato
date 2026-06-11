@@ -83,16 +83,13 @@ export default function Menu() {
                     i === 0 ? "border-t" : ""
                   }`}
                 >
-                  <div className="flex items-baseline justify-between gap-6">
+                  <div className="flex items-baseline">
                     <span
                       className={`font-serif text-[clamp(22px,2.4vw,30px)] inline-block transition-[color,transform] duration-[350ms] ease-(--ease-stellato) ${
                         isActive ? "text-gold-bright translate-x-[10px]" : "text-bone/85"
                       }`}
                     >
                       {t.menu.items[item.key].name}
-                    </span>
-                    <span className="font-serif text-[19px] text-gold whitespace-nowrap">
-                      {item.price}
                     </span>
                   </div>
                   <p

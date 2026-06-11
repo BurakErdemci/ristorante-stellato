@@ -318,7 +318,7 @@ const tr = {
     title1: "Gastronomik",
     title2: "yolculuk",
     categoryLabel: "Menü kategorileri",
-    tastingNote: "Tadım menüsü · 9 tabak · ₺4.800",
+    tastingNote: "Tadım menüsü · 9 tabak",
     wineNote: "Şarap eşleşmesi · Sommelier seçkisi",
   },
   cantina: {
