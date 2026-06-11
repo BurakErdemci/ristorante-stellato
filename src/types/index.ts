@@ -25,7 +25,6 @@ export interface Dish {
   name: string;
   desc: string;
   image: string;
-  price?: string;
   isChefChoice?: boolean;
 }
 
