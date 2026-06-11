@@ -1,7 +1,21 @@
 @import "tailwindcss";
 
-/* --- TEMA DEĞİŞKENLERİ --- */
+/* --- TEMA DEĞİŞKENLERİ ---
+   Yeni tasarım (Stellato redesign) sabit "ink & gold" paletini kullanır.
+   Aşağıdaki --bg-* / --text-* değişkenleri admin sayfalarının mevcut
+   stillerini ayakta tutmak için korunmuştur. */
 :root {
+  /* Stellato redesign token'ları (design-reference/stellato.html) */
+  --ink:         #081016;
+  --ink-soft:    #0C161E;
+  --gold:        #C9A36A;
+  --gold-bright: #E8CFA3;
+  --bone:        #EFE7D8;
+  --wine:        #5E2233;
+  --line:        rgba(201, 163, 106, 0.2);
+  --ease:        cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Eski tema değişkenleri (admin ve yardımcı sayfalar) */
   --bg-main: #050505;
   --bg-surface: #121212;
   --bg-elevated: #0a0a0a;
@@ -16,23 +30,17 @@
   --scrollbar-thumb: #333;
 }
 
-html.light {
-  --bg-main: #f0ebe4;
-  --bg-surface: #e8e2d9;
-  --bg-elevated: #ebe5dc;
-  --text-primary: #1c1917;
-  --text-secondary: #3d3730;
-  --text-muted: #6b6560;
-  --accent-gold: #B8960F;
-  --border-subtle: rgba(0, 0, 0, 0.12);
-  --border-faint: rgba(0, 0, 0, 0.06);
-  --overlay: rgba(0, 0, 0, 0.04);
-  --scrollbar-track: #f0ebe4;
-  --scrollbar-thumb: #c4bdb4;
-}
-
 @theme {
-  /* --- RENKLER (tema-uyumlu) --- */
+  /* --- YENİ TASARIM RENKLERİ --- */
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-bone: var(--bone);
+  --color-wine: var(--wine);
+  --color-line: var(--line);
+
+  /* --- ESKİ RENKLER (admin) --- */
   --color-stellato-black: var(--bg-main);
   --color-stellato-dark-green: #0a1f1c;
   --color-stellato-cream: var(--text-primary);
@@ -46,34 +54,32 @@ html.light {
   --color-theme-overlay: var(--overlay);
 
   /* --- FONTLAR --- */
-  --font-serif: var(--font-cormorant), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-bodoni), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
+
+  /* --- EASING --- */
+  --ease-stellato: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* --- BASE STYLES --- */
 
 body {
-  background-color: var(--bg-main);
-  color: var(--text-primary);
+  background-color: var(--ink);
+  color: var(--bone);
   font-family: var(--font-sans);
+  font-weight: 300;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
+  font-weight: 500;
 }
-
-/* --- PREMIUM DOKUNUŞLAR --- */
 
 ::selection {
-  background-color: var(--accent-gold);
-  color: #000;
-}
-
-html {
-  scroll-behavior: smooth;
+  background-color: var(--gold);
+  color: var(--ink);
 }
 
 ::-webkit-scrollbar {
@@ -90,99 +96,120 @@ html {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-gold);
+  background: var(--gold);
 }
 
-/* --- FORCE DARK: fotoğraflı arka plan sayfaları her zaman koyu kalır --- */
-.force-dark {
-  --bg-main: #050505;
-  --bg-surface: #121212;
-  --bg-elevated: #0a0a0a;
-  --text-primary: #f4f4f4;
-  --text-secondary: #d6d3d1;
-  --text-muted: #a8a29e;
-  --accent-gold: #D4AF37;
-  --border-subtle: rgba(255, 255, 255, 0.1);
-  --border-faint: rgba(255, 255, 255, 0.05);
-  --overlay: rgba(255, 255, 255, 0.05);
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 3px;
 }
 
-/* --- CUSTOM DATEPICKER --- */
-.react-datepicker {
-  background-color: var(--bg-elevated) !important;
-  border: 1px solid var(--border-subtle) !important;
-  font-family: var(--font-sans) !important;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8) !important;
-}
-
-.react-datepicker__header {
-  background-color: var(--bg-surface) !important;
-  border-bottom: 1px solid var(--border-faint) !important;
-}
-
-.react-datepicker__current-month,
-.react-datepicker__day-name {
-  color: var(--accent-gold) !important;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 0.8rem !important;
-}
-
-.react-datepicker__day {
-  color: var(--text-muted) !important;
-}
-
-.react-datepicker__day:hover {
-  background-color: rgba(212, 175, 55, 0.2) !important;
-  color: var(--text-primary) !important;
-}
-
-.react-datepicker__day--selected,
-.react-datepicker__time-list-item--selected {
-  background-color: var(--accent-gold) !important;
-  color: #000 !important;
-  font-weight: bold !important;
-}
-
-.react-datepicker__day--keyboard-selected {
-  background-color: rgba(212, 175, 55, 0.5) !important;
-  color: var(--text-primary) !important;
-}
-
-.react-datepicker__time-container {
-  border-left: 1px solid var(--border-subtle) !important;
-}
-
-.react-datepicker__time-container .react-datepicker__time {
-  background-color: var(--bg-elevated) !important;
-}
-
-.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item {
-  color: var(--text-muted) !important;
-}
-
-.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item:hover {
-  background-color: rgba(212, 175, 55, 0.2) !important;
-  color: var(--text-primary) !important;
-}
-
-/* Ok İşaretleri */
-.react-datepicker__navigation-icon::before {
-  border-color: var(--accent-gold) !important;
-}
-
-/* Input alanı özelleştirmesi */
-.custom-datepicker-input {
-  width: 100%;
-  background: transparent;
-  color: var(--text-secondary);
-  border-bottom: 1px solid var(--border-subtle);
-  padding: 12px 0;
-  font-family: var(--font-sans);
-  font-weight: 300;
-  cursor: pointer;
-}
-.custom-datepicker-input:focus {
+input:focus-visible,
+textarea:focus-visible {
   outline: none;
-  border-color: var(--accent-gold);
+}
+
+/* --- LENIS --- */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* --- EYEBROW (bölüm üst etiketi) --- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 400;
+}
+.eyebrow::before {
+  content: "";
+  width: 36px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.7;
+}
+.eyebrow.eyebrow-center::after {
+  content: "";
+  width: 36px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.7;
+}
+
+/* --- SCROLL REVEAL --- */
+html.has-js:not(.reduced) .rv {
+  opacity: 0;
+  transform: translateY(34px);
+}
+
+/* --- CUSTOM CURSOR --- */
+.cursor-dot, .cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 300;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .cursor-dot, .cursor-ring { display: block; }
+}
+.cursor-dot {
+  width: 5px;
+  height: 5px;
+  background: var(--gold-bright);
+}
+.cursor-ring {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(201, 163, 106, 0.5);
+  transition: width 0.3s var(--ease), height 0.3s var(--ease), background 0.3s;
+}
+.cursor-ring.is-hover {
+  width: 58px;
+  height: 58px;
+  background: rgba(201, 163, 106, 0.08);
+}
+
+/* --- MARQUEE --- */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-x 40s linear infinite;
+  will-change: transform;
+}
+@keyframes marquee-x {
+  to { transform: translateX(-50%); }
+}
+
+/* --- STORIA: ilk harf büyütme --- */
+.storia-lead::first-letter {
+  font-family: var(--font-serif);
+  font-size: 4.1em;
+  line-height: 0.8;
+  float: left;
+  padding: 8px 14px 0 0;
+  color: var(--wine);
+}
+
+/* --- FOOTER dev yazı --- */
+.foot-giant {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(201, 163, 106, 0.32);
+}
+
+/* --- REDUCED MOTION --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

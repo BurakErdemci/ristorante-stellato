@@ -1,21 +1,27 @@
-import Navbar from '@/components/Navbar';
-import Hero from '@/components/Hero';
-import About from '@/components/About';
-import MenuSection from '@/components/MenuSection';
-import Gallery from '@/components/Gallery';
-import Contact from '@/components/Contact';
-import Accolades from '@/components/Accolades';
+import Header from "@/components/layout/Header";
+import CustomCursor from "@/components/layout/CustomCursor";
+import Hero from "@/components/home/Hero";
+import Marquee from "@/components/home/Marquee";
+import Storia from "@/components/home/Storia";
+import Menu from "@/components/home/Menu";
+import Cantina from "@/components/home/Cantina";
+import Sera from "@/components/home/Sera";
+import Riserva from "@/components/home/Riserva";
+import Footer from "@/components/home/Footer";
 
 export default function Home() {
   return (
     <main className="w-full">
-      <Navbar />
+      <CustomCursor />
+      <Header />
       <Hero />
-      <Accolades/>
-      <About />
-      <MenuSection />
-       <Gallery />
-      <Contact />
+      <Marquee />
+      <Storia />
+      <Menu />
+      <Cantina />
+      <Sera />
+      <Riserva />
+      <Footer />
     </main>
   );
 }

@@ -1,31 +1,31 @@
-import { Cormorant_Garamond, Montserrat } from "next/font/google";
+import { Bodoni_Moda, Jost } from "next/font/google";
 import "./globals.css";
-import type { Metadata } from "next";
-import { ThemeProvider } from "@/components/ThemeProvider";
+import type { Metadata, Viewport } from "next";
 import { LanguageProvider } from "@/components/LanguageProvider";
+import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 
-// 1. Lüks Başlık Fontu (Serif)
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  variable: "--font-cormorant",
-  weight: ["300", "400", "500", "600", "700"],
+// Display fontu (serif, italik destekli)
+const bodoni = Bodoni_Moda({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-bodoni",
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
-// 2. Modern Gövde Fontu (Sans-Serif)
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  variable: "--font-montserrat",
+// Gövde fontu (sans-serif)
+const jost = Jost({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-jost",
   weight: ["300", "400", "500"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Ristorante Stellato | Ultra-Luxury Italian Dining",
-  description: "Geleneksel İtalyan lezzetlerinin modern gastronomi ile buluştuğu nokta.",
+  title: "Stellato — Cena Sotto le Stelle",
+  description: "Yıldızların altında bir İtalyan akşamı. Ristorante Stellato, İstanbul.",
   manifest: "/manifest.json",
-  themeColor: "#D4AF37",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
@@ -33,16 +33,20 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#C9A36A",
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="tr" className="scroll-smooth">
-      <body className={`${cormorant.variable} ${montserrat.variable} antialiased`}>
-        <ThemeProvider>
-          <LanguageProvider>
+    <html lang="tr">
+      <body className={`${bodoni.variable} ${jost.variable} antialiased`}>
+        <LanguageProvider>
+          <SmoothScrollProvider>
             {children}
             <ServiceWorkerRegister />
-          </LanguageProvider>
-        </ThemeProvider>
+          </SmoothScrollProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

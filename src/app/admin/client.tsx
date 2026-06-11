@@ -1,6 +1,6 @@
 "use client";
 
-import Navbar from "@/components/Navbar";
+import Header from "@/components/layout/Header";
 import AdminReservations from "@/components/AdminReservations";
 import AdminHeader from "@/components/AdminHeader";
 import { Users, Clock, CheckCircle, AlertCircle, LucideIcon } from "lucide-react";
@@ -36,7 +36,7 @@ export default function AdminClient({ reservations }: Props) {
 
   return (
     <main className="min-h-screen bg-stellato-black text-theme-secondary selection:bg-stellato-gold selection:text-black">
-      <Navbar />
+      <Header variant="back" />
 
       <div className="container mx-auto px-6 pt-32 pb-20">
         {/* Başlık */}

@@ -1,7 +1,7 @@
 "use client";
 
 import { cancelReservationByUser } from "@/actions/reservationActions";
-import Navbar from "@/components/Navbar";
+import Header from "@/components/layout/Header";
 import { useTranslation } from "@/components/LanguageProvider";
 import { Calendar, Clock, Users, CheckCircle, XCircle, AlertTriangle } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -29,7 +29,7 @@ export default function ReservationManageClient({ reservation, id }: Props) {
 
   return (
     <main className="force-dark min-h-screen bg-stellato-black text-white selection:bg-stellato-gold selection:text-black">
-      <Navbar />
+      <Header variant="back" />
 
       <div className="container mx-auto px-6 pt-32 pb-20 flex justify-center">
         <div className="w-full max-w-2xl bg-elevated border border-theme-border-faint p-8 md:p-12 rounded-sm shadow-2xl relative overflow-hidden">

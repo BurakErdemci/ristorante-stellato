@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useSyncExternalStore } from "react";
 import { translations, type Locale, type Translations } from "@/i18n";
 
 interface LanguageContextType {
@@ -15,39 +15,44 @@ const LanguageContext = createContext<LanguageContextType>({
   t: translations.tr,
 });
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("tr");
-  const [mounted, setMounted] = useState(false);
+const LOCALE_EVENT = "stellato-locale-change";
 
-  useEffect(() => {
-    const stored = localStorage.getItem("locale") as Locale | null;
-    if (stored && stored in translations) {
-      setLocaleState(stored);
-    }
-    setMounted(true);
-  }, []);
+function isLocale(value: string | null): value is Locale {
+  return value !== null && value in translations;
+}
+
+function getStoredLocale(): Locale {
+  if (typeof window === "undefined") return "tr";
+  const stored = localStorage.getItem("locale");
+  return isLocale(stored) ? stored : "tr";
+}
+
+function subscribeLocale(onStoreChange: () => void) {
+  window.addEventListener("storage", onStoreChange);
+  window.addEventListener(LOCALE_EVENT, onStoreChange);
+  return () => {
+    window.removeEventListener("storage", onStoreChange);
+    window.removeEventListener(LOCALE_EVENT, onStoreChange);
+  };
+}
+
+export function LanguageProvider({ children }: { children: React.ReactNode }) {
+  const locale = useSyncExternalStore<Locale>(subscribeLocale, getStoredLocale, () => "tr");
 
   const setLocale = (newLocale: Locale) => {
-    setLocaleState(newLocale);
     localStorage.setItem("locale", newLocale);
     document.documentElement.lang = newLocale;
+    window.dispatchEvent(new Event(LOCALE_EVENT));
   };
 
+  useEffect(() => {
+    document.documentElement.lang = locale;
+  }, [locale]);
+
   const t = translations[locale];
-
-  if (!mounted) {
-    return (
-      <LanguageContext.Provider
-        value={{ locale: "tr", setLocale: () => {}, t: translations.tr }}
-      >
-        {children}
-      </LanguageContext.Provider>
-    );
-  }
-
   return (
     <LanguageContext.Provider value={{ locale, setLocale, t }}>
-      {children}
+      <div lang={locale}>{children}</div>
     </LanguageContext.Provider>
   );
 }
