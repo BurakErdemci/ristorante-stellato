@@ -381,6 +381,76 @@ export default function DiningRoom(props: DiningRoomProps) {
         gsapSafe(o.group.position, { y: selected ? 1.2 : 0, duration: 0.6 });
       });
     }
+    /* ---- pan & zoom offsets ---- */
+    let panOffset = { x: 0, z: 0 };
+    let zoomScale = 1.0;
+
+    let initialPinchDistance = 0;
+    let startZoomScale = 1.0;
+    let isDragging = false;
+    let dragStart = { x: 0, y: 0 };
+    let startPanOffset = { x: 0, z: 0 };
+
+    const onTouchStart = (e: TouchEvent) => {
+      const { step } = propsRef.current;
+      if (step !== 2) return;
+      
+      if (e.touches.length === 1) {
+        isDragging = true;
+        dragStart.x = e.touches[0].clientX;
+        dragStart.y = e.touches[0].clientY;
+        startPanOffset.x = panOffset.x;
+        startPanOffset.z = panOffset.z;
+      } else if (e.touches.length === 2) {
+        isDragging = false;
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        initialPinchDistance = Math.hypot(dx, dy);
+        startZoomScale = zoomScale;
+      }
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      const { step } = propsRef.current;
+      if (step !== 2) return;
+      
+      if (e.touches.length === 1 && isDragging) {
+        const dx = e.touches[0].clientX - dragStart.x;
+        const dy = e.touches[0].clientY - dragStart.y;
+        
+        // Panning sensitivity speed scale
+        const scale = 0.45;
+        panOffset.x = startPanOffset.x - dx * scale;
+        panOffset.z = startPanOffset.z - dy * scale;
+      } else if (e.touches.length === 2) {
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        const dist = Math.hypot(dx, dy);
+        if (initialPinchDistance > 0) {
+          const ratio = initialPinchDistance / dist;
+          // Zoom scale: clamp between 0.4 (close) and 2.0 (far)
+          zoomScale = Math.min(2.0, Math.max(0.4, startZoomScale * ratio));
+        }
+      }
+    };
+
+    const onTouchEnd = (e: TouchEvent) => {
+      if (e.touches.length === 0) {
+        isDragging = false;
+        initialPinchDistance = 0;
+      } else if (e.touches.length === 1) {
+        isDragging = true;
+        dragStart.x = e.touches[0].clientX;
+        dragStart.y = e.touches[0].clientY;
+        startPanOffset.x = panOffset.x;
+        startPanOffset.z = panOffset.z;
+        initialPinchDistance = 0;
+      }
+    };
+
+    canvas.addEventListener("touchstart", onTouchStart, { passive: true });
+    canvas.addEventListener("touchmove", onTouchMove, { passive: true });
+    canvas.addEventListener("touchend", onTouchEnd, { passive: true });
 
     /* ---- raycast: hover + seçim ---- */
     const ray = new THREE.Raycaster();
@@ -437,9 +507,27 @@ export default function DiningRoom(props: DiningRoomProps) {
     };
     if (finePointer) canvas.addEventListener("pointermove", onPointerMove, { passive: true });
 
+    let pointerDownStart = { x: 0, y: 0 };
+    let pointerDownTime = 0;
+
     const onPointerDown = (e: PointerEvent) => {
+      const { step } = propsRef.current;
+      if (step !== 2) return;
+      pointerDownStart.x = e.clientX;
+      pointerDownStart.y = e.clientY;
+      pointerDownTime = Date.now();
+    };
+
+    const onPointerUp = (e: PointerEvent) => {
       const { step, selectedId, onSelect } = propsRef.current;
       if (step !== 2) return;
+
+      const dragDist = Math.hypot(e.clientX - pointerDownStart.x, e.clientY - pointerDownStart.y);
+      const dragDuration = Date.now() - pointerDownTime;
+
+      // If they dragged more than 8 pixels or held for more than 280ms, it's a drag gesture, not a selection tap
+      if (dragDist > 8 || dragDuration > 280) return;
+
       const t = castAt(e.clientX, e.clientY);
       if (!t) return;
       const st = tableState(t);
@@ -453,7 +541,9 @@ export default function DiningRoom(props: DiningRoomProps) {
       }
       onSelect(t.id === selectedId ? null : t.id);
     };
+
     canvas.addEventListener("pointerdown", onPointerDown);
+    canvas.addEventListener("pointerup", onPointerUp);
 
     /* ---- saat ruh hali ---- */
     function setMood(timeIdx: number) {
@@ -483,6 +573,9 @@ export default function DiningRoom(props: DiningRoomProps) {
         c.y *= 1.25;
         c.z *= 1.2;
       }
+      panOffset.x = 0;
+      panOffset.z = 0;
+      zoomScale = 1.0;
       applyViewOffset();
       if (!reduced) {
         gsap.to(camPos, { x: c.x, y: c.y, z: c.z, duration: 1.8, ease: "power3.inOut" });
@@ -556,8 +649,16 @@ export default function DiningRoom(props: DiningRoomProps) {
 
       tx += (mx - tx) * 0.04;
       ty += (my - ty) * 0.04;
-      camera.position.set(camPos.x + tx * 26, camPos.y - ty * 14, camPos.z);
-      camera.lookAt(camTarget);
+
+      const targetCamX = camPos.x + panOffset.x + tx * 26;
+      const targetCamY = camPos.y * zoomScale - ty * 14;
+      const targetCamZ = camPos.z * zoomScale + panOffset.z;
+      camera.position.set(targetCamX, targetCamY, targetCamZ);
+
+      const targetLookX = camTarget.x + panOffset.x;
+      const targetLookY = camTarget.y;
+      const targetLookZ = camTarget.z + panOffset.z;
+      camera.lookAt(targetLookX, targetLookY, targetLookZ);
 
       const hasSelection = propsRef.current.selectedId !== null;
       tableObjs.forEach((o) => {
@@ -626,6 +727,10 @@ export default function DiningRoom(props: DiningRoomProps) {
       cancelAnimationFrame(rafId);
       canvas.removeEventListener("pointermove", onPointerMove);
       canvas.removeEventListener("pointerdown", onPointerDown);
+      canvas.removeEventListener("pointerup", onPointerUp);
+      canvas.removeEventListener("touchstart", onTouchStart);
+      canvas.removeEventListener("touchmove", onTouchMove);
+      canvas.removeEventListener("touchend", onTouchEnd);
       window.removeEventListener("mousemove", onMouse);
       window.removeEventListener("resize", onResize);
       document.body.style.cursor = "";
