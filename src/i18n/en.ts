@@ -413,6 +413,8 @@ const en: Translations = {
     confirmNote:
       "Your table will be held for 15 minutes. For changes, please call +90 216 123 45 67.",
     aPresto: "See you soon! ✦",
+    showPanel: "Show Panel",
+    hidePanel: "View Plan",
     confirm: "Confirm",
   },
 } as const;

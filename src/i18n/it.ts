@@ -413,6 +413,8 @@ const it: Translations = {
     confirmNote:
       "Il tavolo sarà riservato per 15 minuti. Per modifiche chiamate il +90 216 123 45 67.",
     aPresto: "A presto! ✦",
+    showPanel: "Mostra Pannello",
+    hidePanel: "Vedi Pianta",
     confirm: "Conferma",
   },
 } as const;

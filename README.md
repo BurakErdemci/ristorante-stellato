@@ -9,13 +9,15 @@
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)
 ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)
+![Three.js](https://img.shields.io/badge/Three.js-r128-000000?style=for-the-badge&logo=three.js&logoColor=white)
+![GSAP](https://img.shields.io/badge/GSAP-3.12-88CE02?style=for-the-badge&logo=greensock&logoColor=white)
 ![NextAuth](https://img.shields.io/badge/NextAuth-v5-blueviolet?style=for-the-badge)
 ![Vitest](https://img.shields.io/badge/Vitest-4.1-6E9F18?style=for-the-badge&logo=vitest&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Vercel-Deployed-000000?style=for-the-badge&logo=vercel)
 
-**Modern Full-Stack Rezervasyon Yönetim Sistemi**
+**Sinematik 3D Deneyimli Full-Stack Rezervasyon Platformu**
 
-Michelin yıldızlı İtalyan restoranı için tasarlanmış, interaktif masa seçimi ve gelişmiş yönetim paneli içeren profesyonel rezervasyon platformu.
+Michelin yıldızlı bir İtalyan restoranı için tasarlanmış; Three.js ile gerçek zamanlı 3D salon planı, takımyıldız temalı yıldız alanı ve GSAP + Lenis ile akıcı sinematik geçişler sunan premium rezervasyon ve yönetim platformu.
 
 [🌐 Canlı Demo](https://ristorante-stellato-puum.vercel.app) • [📸 Screenshots](./screenshots.md) • [🚀 Kurulum](#-kurulum)
 
@@ -45,18 +47,20 @@ Michelin yıldızlı İtalyan restoranı için tasarlanmış, interaktif masa se
 
 ## 🎯 Hakkında
 
-**Ristorante Stellato**, Next.js 16 ve Server Actions kullanılarak geliştirilmiş, gerçek dünya ihtiyaçlarına yönelik bir Full-Stack rezervasyon yönetim sistemidir. Proje, modern web geliştirme pratiklerini ve premium kullanıcı deneyimini bir araya getirerek hem müşterilere hem de restoran yönetimine kesintisiz bir deneyim sunar.
+**Ristorante Stellato**, Next.js 16 ve Server Actions kullanılarak geliştirilmiş, gerçek dünya ihtiyaçlarına yönelik bir Full-Stack rezervasyon yönetim sistemidir. Sinematik bir ön yüz katmanı (Three.js + GSAP + Lenis) ile premium kullanıcı deneyimini, sağlam bir backend mimarisiyle bir araya getirerek hem misafirlere hem de restoran yönetimine kesintisiz bir deneyim sunar.
 
 ### ⭐ Neden Bu Proje Özel?
 
-- 🎨 **İnteraktif Masa Seçimi**: Krokilerde görsel masa seçimi ve otomatik kapasite kontrolü
-- 📱 **Modern UX**: Multi-step form ile akıcı rezervasyon süreci
-- 🔄 **Real-time Validasyon**: Dolu saatleri ve geçmiş tarihleri engelleyen akıllı sistem
-- 📧 **Otomatik Bildirimler**: Email ile rezervasyon onayı ve müşteriye özel takip linki
+- 🌌 **Sinematik 3D Hero**: Three.js ile katmanlı yıldız alanı, scroll'da çizilen takımyıldız ve fare paralaksı
+- 🪑 **Gerçek Zamanlı 3D Salon Planı**: Rezervasyonda WebGL ile modellenmiş salon — mum yanan masalar müsait, sönük masalar dolu; raycast ile hover/seçim
+- 🎬 **Akıcı Sinematik Geçişler**: Lenis smooth-scroll + GSAP ScrollTrigger ile senkronize reveal, perde ve paralaks animasyonları
+- 📱 **4 Adımlı Rezervasyon Akışı**: Tarih/saat → 3D masa seçimi → bilgiler → onay; her adımda kamera koreografisi
+- 🔄 **Akıllı Doluluk**: Tarih+saat'e göre değişen müsaitlik; ayrık `getAvailability()` arayüzü ile backend'e bağlanabilir
+- 📧 **Otomatik Bildirimler**: Email ile rezervasyon onayı ve misafire özel takip linki
 - 📊 **Güçlü Dashboard**: İstatistik, filtreleme ve canlı arama özellikleri
 - 🔐 **Güvenli Auth**: NextAuth v5 ile korunan admin paneli, gizli URL routing
 - 🌍 **Çoklu Dil**: Türkçe, İngilizce ve İtalyanca tam dil desteği (i18n)
-- 🎨 **Dark/Light Tema**: Göz yormayan sıcak krem tonlu açık tema ve premium koyu tema
+- ♿ **Erişilebilirlik**: `prefers-reduced-motion` desteği — animasyonlar ve WebGL sahneleri kapatılır, içerik statik sunulur
 - 📱 **PWA Desteği**: Offline erişim, ana ekrana ekleme, service worker
 - 🛡️ **Rate Limiting**: IP tabanlı istek sınırlama ile spam koruması
 - 🚀 **Production Ready**: Vercel'de canlı, MongoDB Atlas ile güvenli veri yönetimi
@@ -67,53 +71,67 @@ Michelin yıldızlı İtalyan restoranı için tasarlanmış, interaktif masa se
 
 ### 🎫 Müşteri Tarafı
 
-#### 1️⃣ İnteraktif Masa Seçimi
+#### 1️⃣ Sinematik Ana Sayfa (Three.js + GSAP + Lenis)
 ```
-✅ Restoran krokisinde görsel seçim
+✅ WebGL yıldız alanı: katmanlı parçacıklar, fare paralaksı, scroll'da dalış
+✅ Scroll ile çizilen takımyıldız (constellation) animasyonu
+✅ Preloader → hero giriş koreografisi (harf harf staggered reveal)
+✅ Lenis smooth-scroll, GSAP ScrollTrigger ile senkron
+✅ Sticky menü paneli, crossfade görsel galerisi
+✅ Özel altın imleç (cursor dot + ring)
+```
+
+#### 2️⃣ Gerçek Zamanlı 3D Salon Planı
+```
+✅ WebGL ile modellenmiş salon: masalar, sandalyeler, mumlar, pencere/teras
+✅ Mum yanan masalar müsait — sönük masalar bu akşam dolu
+✅ Raycast ile hover (tooltip) ve dokunarak seçim
 ✅ Kapasite kontrolü (4 kişi → 2 kişilik masa seçilemez)
-✅ Dolu masaların otomatik işaretlenmesi
-✅ Hover efektleri ile detay görüntüleme
+✅ Saate göre değişen sahne ışığı (alacakaranlıktan geceye)
+✅ Onayda masadan yükselen altın tozu kutlaması
 ```
 
-#### 2️⃣ Multi-Step Rezervasyon Formu
-- **Adım 1**: Tarih ve saat seçimi
-- **Adım 2**: Masa seçimi (interaktif kroki)
+#### 3️⃣ 4 Adımlı Rezervasyon Akışı
+- **Adım 1**: Tarih (3 aya kadar) ve saat seçimi + kişi sayısı
+- **Adım 2**: 3D salon planından masa seçimi
 - **Adım 3**: İletişim bilgileri
-- **Adım 4**: Rezervasyon özeti ve onay
+- **Adım 4**: Rezervasyon özeti, kod ve onay
 
-#### 3️⃣ Akıllı Takvim Sistemi
+> Her adım geçişinde kamera salonun farklı bir açısına süzülür (kamera koreografisi).
+
+#### 4️⃣ Akıllı Doluluk & Takvim
 ```javascript
-✅ Geçmiş tarihleri engelleme
-✅ Dolu saatleri otomatik kapatma
-✅ Restoran çalışma saatleri kontrolü
-✅ Özel gün ve tatil yönetimi
+✅ Geçmiş tarihleri engelleme (yalnızca bugünden itibaren)
+✅ Tarih + saate göre değişen masa doluluğu
+✅ Ayrık `getAvailability(date, time)` arayüzü — mock'tan backend'e geçiş tek noktadan
+✅ Seçili masa, misafir sayısı artınca otomatik bırakılır
 ```
 
-#### 4️⃣ Email Notification
+#### 5️⃣ Email Notification
 - Anında rezervasyon onay maili
-- Müşteriye özel rezervasyon takip linki
+- Misafire özel rezervasyon takip linki
 - Rezervasyon detayları (tarih, saat, masa, kişi sayısı)
 - Self-service iptal imkanı
 
-#### 5️⃣ Çoklu Dil Desteği (i18n)
-- **3 Dil**: Türkçe (varsayılan), İngilizce, İtalyanca
-- **Navbar'da dil seçici**: Bayrak ve isimli dropdown menü
+#### 6️⃣ Çoklu Dil Desteği (i18n)
+- **3 Dil**: Türkçe (varsayılan), İngilizce, İtalyanca — **tüm arayüz tam çevrilidir**
+- **Header'da dil seçici**: TR / EN / IT
 - **LocalStorage ile kalıcılık**: Seçilen dil hatırlanır
-- **Tam kapsam**: Tüm UI metinleri, menü açıklamaları, form etiketleri, hata mesajları
+- **Tam kapsam**: Tüm UI metinleri, bölüm etiketleri, menü açıklamaları, form etiketleri, 3D sahne tooltip'leri, hata mesajları
 - **Locale-aware tarih formatı**: Seçilen dile göre tarih/saat gösterimi
 
-#### 6️⃣ Dark/Light Tema
-- **Navbar'da tema toggle**: Tek tıkla geçiş
-- **Sıcak tonlar**: Açık tema göz yormayan krem/bej tonlarında
-- **Fotoğraflı sayfalar korunur**: Rezervasyon ve login sayfaları her zaman koyu kalır (`force-dark`)
-- **LocalStorage ile kalıcılık**: Tercih hatırlanır
+#### 7️⃣ Erişilebilirlik & Performans
+- **`prefers-reduced-motion`**: Animasyonlar ve WebGL sahneleri kapatılır, içerik statik gradyan/görsellerle sunulur
+- **Koşullu render**: 3D sahneler `next/dynamic` ile `ssr:false` yüklenir (SSR'da `window`/`THREE` patlamaz)
+- **Görünürlükte render**: Yıldız alanı yalnızca hero ekrandayken çizilir (IntersectionObserver)
+- **Kaynak temizliği**: Tüm WebGL geometry/material/renderer ve GSAP context'leri unmount'ta dispose/revert edilir
 
-#### 7️⃣ PWA (Progressive Web App)
+#### 8️⃣ PWA (Progressive Web App)
 - **Ana ekrana ekleme**: Mobilde native uygulama hissi
 - **Service Worker**: Statik asset'ler ve sayfalar offline cache'lenir
 - **Web App Manifest**: İkon, tema rengi ve splash screen yapılandırması
 
-#### 8️⃣ Rate Limiting
+#### 9️⃣ Rate Limiting
 - **IP tabanlı**: Sliding window algoritması ile istek sınırlama
 - **Rezervasyon koruması**: Spam form gönderimini engeller
 - **İptal koruması**: Kötü niyetli toplu iptal girişimlerini engeller
@@ -149,8 +167,12 @@ Michelin yıldızlı İtalyan restoranı için tasarlanmış, interaktif masa se
 - **Framework**: Next.js 16 (App Router, React Compiler)
 - **Language**: TypeScript (strict mode)
 - **UI Library**: React 19.2
-- **Styling**: Tailwind CSS v4 (CSS custom properties ile tema sistemi)
-- **Animations**: Framer Motion
+- **Styling**: Tailwind CSS v4 (CSS custom properties ile "ink & gold" token sistemi)
+- **3D / WebGL**: Three.js (r128) — yıldız alanı + 3D salon planı
+- **Animasyon**: GSAP 3.12 + ScrollTrigger (timeline, reveal, paralaks, kamera tween'leri)
+- **Smooth Scroll**: Lenis (tek `SmoothScrollProvider`, ScrollTrigger ile senkron)
+- **Tipografi**: `next/font/google` — Bodoni Moda (display) + Jost (gövde)
+- **Admin animasyonları**: Framer Motion (admin paneli & login)
 - **Icons**: Lucide React
 - **Validation**: Zod 4
 - **i18n**: Custom React Context (TR/EN/IT — bağımlılık gerektirmez)
@@ -264,11 +286,11 @@ npm start
 
 ### Müşteri Rezervasyon Akışı
 
-1. Ana sayfada **"Rezervasyon Yap"** butonuna tıklayın
-2. Tarih ve saat seçin (geçmiş tarihler disabled)
-3. İnteraktif krokide uygun masayı seçin
+1. Ana sayfada **"Rezervasyon"** butonuna tıklayın
+2. Tarih (3 aya kadar), saat ve kişi sayısını seçin
+3. 3D salon planında mum yanan (müsait) bir masaya dokunun
 4. İletişim bilgilerinizi girin
-5. Özeti kontrol edin ve onaylayın
+5. Özeti kontrol edin ve onaylayın — masanızdan altın tozu yükselir
 6. Email'inize gelen onay mesajını kontrol edin
 7. Email'deki link ile rezervasyonunuzu takip edin
 
@@ -295,11 +317,11 @@ ristorante-stellato/
 │   └── sw.js                        # Service Worker (cache stratejisi)
 ├── src/
 │   ├── app/
-│   │   ├── page.tsx                 # Ana sayfa
-│   │   ├── layout.tsx               # Root layout (ThemeProvider + LanguageProvider)
-│   │   ├── globals.css              # Tema değişkenleri (dark/light/force-dark)
+│   │   ├── page.tsx                 # Ana sayfa (section'ları birleştirir)
+│   │   ├── layout.tsx               # Root layout (fontlar + LanguageProvider + SmoothScrollProvider)
+│   │   ├── globals.css              # "ink & gold" token sistemi + force-dark (admin)
 │   │   ├── rezervasyon/
-│   │   │   └── page.tsx             # Rezervasyon formu (force-dark)
+│   │   │   └── page.tsx             # 3D rezervasyon deneyimi (metadata)
 │   │   ├── rezervasyon-yonet/
 │   │   │   └── [id]/
 │   │   │       ├── page.tsx         # Server: veri çekme
@@ -307,21 +329,37 @@ ristorante-stellato/
 │   │   ├── admin/
 │   │   │   ├── page.tsx             # Server: veri çekme
 │   │   │   ├── client.tsx           # Client: i18n destekli dashboard
-│   │   │   └── login/page.tsx       # Admin giriş sayfası (force-dark)
+│   │   │   └── login/page.tsx       # Admin giriş sayfası
 │   │   └── api/
 │   │       └── auth/[...nextauth]/  # NextAuth API routes
 │   ├── components/
-│   │   ├── Navbar.tsx               # Navigasyon + dil seçici + tema toggle
-│   │   ├── Hero.tsx                 # Hero section
-│   │   ├── MenuSection.tsx          # Menü galerisi (çevrilebilir yemek adları)
-│   │   ├── TableSelection.tsx       # İnteraktif masa seçimi
-│   │   ├── ReservationForm.tsx      # Multi-step form
+│   │   ├── home/                    # Ana sayfa section'ları
+│   │   │   ├── Hero.tsx             #   Sinematik hero (Starfield'i dynamic yükler)
+│   │   │   ├── Marquee.tsx          #   Ödül şeridi
+│   │   │   ├── Storia.tsx           #   Hikaye bölümü
+│   │   │   ├── Menu.tsx             #   Sticky panel + crossfade menü
+│   │   │   ├── Cantina.tsx          #   Mahzen (paralaks)
+│   │   │   ├── Sera.tsx             #   "Bir akşam" editoryal anlar
+│   │   │   ├── Riserva.tsx          #   Rezervasyon CTA + bilgi
+│   │   │   └── Footer.tsx           #   Footer (dev başlık paralaksı)
+│   │   ├── layout/                  # Genel layout bileşenleri
+│   │   │   ├── Header.tsx           #   Navigasyon + dil seçici (home/back varyantları)
+│   │   │   ├── MobileMenu.tsx       #   Mobil menü
+│   │   │   ├── CustomCursor.tsx     #   Altın imleç (fine-pointer)
+│   │   │   ├── Preloader.tsx        #   Açılış perdesi
+│   │   │   └── SmoothScrollProvider.tsx  # Lenis + ScrollTrigger entegrasyonu
+│   │   ├── three/                   # WebGL sahneleri (ssr:false)
+│   │   │   ├── Starfield.tsx        #   Hero yıldız alanı + takımyıldız
+│   │   │   └── DiningRoom.tsx       #   3D salon planı (raycast, kamera, kutlama)
+│   │   ├── reservation/
+│   │   │   └── ReservationExperience.tsx  # 4 adımlı akış + 3D sahne paneli
 │   │   ├── AdminReservations.tsx    # Admin tablo yönetimi
 │   │   ├── AdminHeader.tsx          # Çıkış butonu
 │   │   ├── LanguageProvider.tsx     # i18n context (TR/EN/IT)
-│   │   ├── ThemeProvider.tsx        # Dark/Light tema context
-│   │   ├── ServiceWorkerRegister.tsx # PWA service worker kaydı
-│   │   └── ...                      # Diğer componentler
+│   │   └── ServiceWorkerRegister.tsx # PWA service worker kaydı
+│   ├── data/
+│   │   ├── menu.ts                  # Menü verisi (i18n anahtarları + görseller)
+│   │   └── tables.ts               # Masa şeması, saat slotları, kapasite
 │   ├── i18n/
 │   │   ├── tr.ts                    # Türkçe çeviriler (base type)
 │   │   ├── en.ts                    # İngilizce çeviriler
@@ -334,7 +372,10 @@ ristorante-stellato/
 │   ├── lib/
 │   │   ├── db.ts                    # MongoDB bağlantısı
 │   │   ├── mail.ts                  # Email servisi
-│   │   └── rate-limit.ts           # IP tabanlı rate limiter
+│   │   ├── rate-limit.ts           # IP tabanlı rate limiter
+│   │   ├── availability.ts         # Masa doluluğu arayüzü (mock → backend)
+│   │   ├── useReveal.ts            # Scroll reveal hook'u (GSAP)
+│   │   └── useReducedMotion.ts     # prefers-reduced-motion hook'u
 │   ├── types/
 │   │   └── index.ts                 # TypeScript type tanımları
 │   ├── auth.ts                      # NextAuth v5 yapılandırması
@@ -481,9 +522,15 @@ npm run test:watch    # İzleme modunda çalıştırma
 - [x] Seed script (demo veri)
 - [x] Unit testler (Vitest — 53 test)
 - [x] Rate limiting middleware (IP tabanlı sliding window)
-- [x] Dark/Light tema geçişi (CSS custom properties + ThemeProvider)
+- [x] Sinematik yeniden tasarım (Three.js yıldız alanı + 3D salon planı)
+- [x] GSAP + Lenis ile smooth-scroll ve scroll-trigger animasyonları
+- [x] `prefers-reduced-motion` ve mobil için koşullu render
 - [x] PWA desteği (Service Worker, Web App Manifest, offline cache)
 - [x] Multi-language support (i18n — Türkçe/İngilizce/İtalyanca)
+
+### 🔭 Gelecek Planları
+- [ ] 3D salon doluluğunu canlı backend'e bağlama (`getAvailability` → Server Action)
+- [ ] Masaya özel görünüm: seçilen masanın yakın çekim kamera preset'i
 
 ### 📜 Mevcut Scriptler
 
@@ -555,6 +602,8 @@ Bu proje, modern web geliştirme pratiklerini öğrenmek ve gerçek dünya senar
 - Open source community
 - [Vercel](https://vercel.com) - Harika deployment platform
 - [MongoDB](https://mongodb.com) - Güvenilir database hosting
+- [Three.js](https://threejs.org) - WebGL 3D kütüphanesi
+- [GSAP](https://gsap.com) & [Lenis](https://lenis.darkroom.engineering) - Animasyon ve smooth-scroll
 - [Lucide](https://lucide.dev) - Minimal icon seti
 
 

@@ -68,12 +68,21 @@ export default function DiningRoom(props: DiningRoomProps) {
     // Masaüstünde sol paneli telafi et: sahneyi panelin sağındaki alanın ortasına kaydır.
     // Panel ≈ 24px sol boşluk + 440px genişlik → görünür alanın merkezi ~232px sağda.
     function applyViewOffset() {
-      if (window.matchMedia("(min-width: 921px)").matches) {
+      const isMobileLocal = window.matchMedia("(max-width: 920px)").matches;
+      if (!isMobileLocal) {
         const shift = Math.min(232, innerWidth * 0.18);
         camera.setViewOffset(innerWidth, innerHeight, -shift, 0, innerWidth, innerHeight);
       } else {
-        camera.clearViewOffset();
+        const currentStep = propsRef.current.step;
+        let yShift = 0;
+        if (currentStep === 2) {
+          yShift = innerHeight * 0.18; // Push tables up by 18% of screen height
+        } else {
+          yShift = innerHeight * 0.25; // Push even more on other steps
+        }
+        camera.setViewOffset(innerWidth, innerHeight, 0, yShift, innerWidth, innerHeight);
       }
+      camera.updateProjectionMatrix();
     }
     applyViewOffset();
 
@@ -474,6 +483,7 @@ export default function DiningRoom(props: DiningRoomProps) {
         c.y *= 1.25;
         c.z *= 1.2;
       }
+      applyViewOffset();
       if (!reduced) {
         gsap.to(camPos, { x: c.x, y: c.y, z: c.z, duration: 1.8, ease: "power3.inOut" });
         gsap.to(camTarget, { x: c.look.x, y: c.look.y, z: c.look.z, duration: 1.8, ease: "power3.inOut" });
@@ -648,7 +658,7 @@ export default function DiningRoom(props: DiningRoomProps) {
 
   return (
     <>
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full z-1" />
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full z-1 touch-none" />
       {/* masa tooltip'i */}
       <div
         ref={tipRef}

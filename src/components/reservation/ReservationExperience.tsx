@@ -42,8 +42,22 @@ export default function ReservationExperience() {
   const [submitting, setSubmitting] = useState(false);
   const [resCode, setResCode] = useState("ST-0000");
   const [celebrateSignal, setCelebrateSignal] = useState(0);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   const dateLocale = DATE_LOCALE[locale] ?? "tr-TR";
+
+  // Reset collapse state on step changes
+  useEffect(() => {
+    if (step !== 2) {
+      setIsCollapsed(false);
+    }
+  }, [step]);
+
+  const mobileHeightClass =
+    step === 1 ? "max-md:max-h-[70vh]" :
+    step === 2 ? (isCollapsed ? "max-md:max-h-[64px]" : "max-md:max-h-[38vh]") :
+    step === 3 ? "max-md:max-h-[78vh]" :
+    "max-md:max-h-[68vh]";
 
   // önümüzdeki 3 ay
   const months = useMemo(() => {
@@ -202,7 +216,7 @@ export default function ReservationExperience() {
     "w-full bg-bone/4 border border-line text-bone py-[13px] px-[15px] font-light transition-[border-color,background-color] duration-300 focus:border-gold focus:bg-bone/7 placeholder:text-bone/30";
 
   return (
-    <main className="md:h-svh md:overflow-hidden">
+    <main className="h-[100svh] w-full overflow-hidden relative">
       <CustomCursor />
       <Header variant="back" />
 
@@ -218,7 +232,10 @@ export default function ReservationExperience() {
           celebrateSignal={celebrateSignal}
           onSelect={(id) => {
             setTableId(id);
-            if (id !== null) setStepError(false);
+            if (id !== null) {
+              setStepError(false);
+              setIsCollapsed(false);
+            }
           }}
           texts={texts}
         />
@@ -233,9 +250,25 @@ export default function ReservationExperience() {
         <div>{capLine}</div>
       </div>
 
-      {/* --- panel --- */}
-      <aside className="fixed z-60 top-24 left-[max(24px,3vw)] bottom-7 w-[min(440px,92vw)] flex flex-col bg-[rgba(10,18,26,.78)] border border-line backdrop-blur-2xl max-md:top-auto max-md:left-0 max-md:right-0 max-md:bottom-0 max-md:w-full max-md:max-h-[62vh] max-md:border-x-0 max-md:border-b-0">
-        <div className="pt-[26px] px-[30px]">
+      <aside className={`fixed z-60 top-24 left-[max(24px,3vw)] bottom-7 w-[min(440px,92vw)] flex flex-col bg-[rgba(10,18,26,.78)] border border-line backdrop-blur-2xl transition-[max-height] duration-500 ease-(--ease-stellato) max-md:top-auto max-md:left-0 max-md:right-0 max-md:bottom-0 max-md:w-full max-md:border-x-0 max-md:border-b-0 max-md:border-t max-md:border-line ${mobileHeightClass} ${step === 2 && isCollapsed ? "max-md:overflow-hidden" : ""}`}>
+        {/* Mobile drag handle & collapse toggle */}
+        <div className="hidden max-md:flex items-center justify-between px-5 pt-3 pb-1 shrink-0">
+          <div className="w-[80px]" />
+          <div className="w-12 h-1 bg-bone/20 rounded-full" />
+          <div className="w-[80px] text-right">
+            {step === 2 && (
+              <button
+                type="button"
+                onClick={() => setIsCollapsed(!isCollapsed)}
+                className="text-[9px] tracking-[.18em] uppercase text-gold hover:text-gold-bright transition-colors py-[3px] px-2 bg-ink/40 border border-line rounded select-none cursor-pointer"
+              >
+                {isCollapsed ? t.reservation3d.showPanel : t.reservation3d.hidePanel}
+              </button>
+            )}
+          </div>
+        </div>
+
+        <div className="pt-[26px] px-[30px] max-md:pt-3 max-md:px-5">
           <span className="inline-flex items-center gap-3 text-[10px] tracking-[.42em] uppercase text-gold before:content-[''] before:w-[30px] before:h-px before:bg-gold before:opacity-70">
             {t.reservation3d.eyebrow}
           </span>
@@ -246,7 +279,7 @@ export default function ReservationExperience() {
         </div>
 
         {/* adım çubuğu */}
-        <div className="flex mx-[30px] mt-[22px] border-b border-line">
+        <div className="flex mx-[30px] mt-[22px] border-b border-line max-md:mx-5 max-md:mt-3">
           {stepLabels.map((label, i) => {
             const n = i + 1;
             const state = n === step ? "now" : n < step ? "done" : "todo";
@@ -269,19 +302,19 @@ export default function ReservationExperience() {
 
         <div
           ref={panelBodyRef}
-          className="flex-1 overflow-y-auto pt-6 px-[30px] pb-5 [scrollbar-width:thin] [scrollbar-color:var(--line)_transparent]"
+          className="flex-1 overflow-y-auto pt-6 px-[30px] pb-5 max-md:pt-4 max-md:px-5 max-md:pb-4 [scrollbar-width:thin] [scrollbar-color:var(--line)_transparent]"
         >
           {/* ADIM 1: tarih + saat + kişi */}
           {step === 1 && (
             <section>
               <div className={flabel}>{t.reservation3d.stepDate}</div>
-              <div className="flex gap-2 mb-3">
+              <div className="flex gap-2 mb-3 w-full">
                 {months.map((m, i) => (
                   <button
                     key={i}
                     type="button"
                     onClick={() => setMonthOffset(i)}
-                    className={`px-4 py-2 text-[10px] tracking-[.26em] uppercase border transition-colors duration-300 ${
+                    className={`flex-1 py-2 px-3 max-md:px-1 text-[10px] max-md:text-[9px] tracking-[.26em] max-md:tracking-[.12em] text-center uppercase border transition-colors duration-300 ${
                       monthOffset === i
                         ? "border-gold text-gold-bright"
                         : "border-line text-bone/45 hover:border-gold/55 hover:text-bone"
@@ -519,13 +552,13 @@ export default function ReservationExperience() {
           )}
         </div>
 
-        <div className="flex gap-3 pt-[18px] px-[30px] pb-6 border-t border-line">
+        <div className="flex gap-3 pt-[18px] px-[30px] pb-6 border-t border-line max-md:px-5 max-md:py-4">
           {step > 1 && step < 4 && (
             <button
               type="button"
               data-hover
               onClick={() => goStep(step - 1)}
-              className="flex-1 py-4 px-[10px] text-center text-[11px] tracking-[.3em] uppercase border border-line text-bone/70 hover:border-gold hover:text-gold-bright transition-colors duration-[350ms]"
+              className="flex-1 py-4 px-[10px] max-md:py-3 text-center text-[11px] tracking-[.3em] uppercase border border-line text-bone/70 hover:border-gold hover:text-gold-bright transition-colors duration-[350ms]"
             >
               {t.reservationForm.back}
             </button>
@@ -535,7 +568,7 @@ export default function ReservationExperience() {
             data-hover
             disabled={submitting}
             onClick={next}
-            className="flex-1 py-4 px-[10px] text-center text-[11px] tracking-[.3em] uppercase bg-gold text-ink hover:bg-gold-bright transition-colors duration-[350ms] disabled:opacity-35 disabled:pointer-events-none"
+            className="flex-1 py-4 px-[10px] max-md:py-3 text-center text-[11px] tracking-[.3em] uppercase bg-gold text-ink hover:bg-gold-bright transition-colors duration-[350ms] disabled:opacity-35 disabled:pointer-events-none"
           >
             {submitting
               ? t.reservationForm.processing

@@ -416,6 +416,8 @@ const tr = {
     confirmNote:
       "Masanız 15 dakika boyunca tutulacaktır. Değişiklik için +90 216 123 45 67 numarasını arayabilirsiniz.",
     aPresto: "Görüşmek üzere! ✦",
+    showPanel: "Paneli Göster",
+    hidePanel: "Planı Gör",
     confirm: "Onayla",
   },
 } as const;
