@@ -1,0 +1,139 @@
+<!doctype html><meta charset="utf-8"><style>
+ body{margin:0;background:#0d1117;color:#e6edf3;
+   font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+ .wrap{max-width:1000px;margin:0 auto;padding:32px 16px}
+ h1,h2,h3{border:0;margin:24px 0 16px;font-weight:600;line-height:1.25}
+ h1{font-size:2em;padding-bottom:.3em;border-bottom:1px solid #30363d}
+ h2{font-size:1.5em;padding-bottom:.3em;border-bottom:1px solid #30363d}
+ h3{font-size:1.25em}
+ a{color:#4493f8;text-decoration:none} a:hover{text-decoration:underline}
+ img{max-width:100%} p,ul,ol{margin:0 0 16px} li{margin:.25em 0}
+ code{background:#161b22;padding:.2em .4em;border-radius:6px;font-size:85%;
+   font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+ pre{background:#161b22;padding:16px;border-radius:6px;overflow:auto}
+ pre code{background:none;padding:0}
+ table{border-collapse:collapse;margin:0 0 16px;display:block;overflow:auto;width:max-content;max-width:100%}
+ th,td{border:1px solid #30363d;padding:6px 13px} tr:nth-child(2n){background:#161b22}
+ blockquote{margin:0 0 16px;padding:0 1em;color:#8b949e;border-left:.25em solid #30363d}
+ hr{height:.25em;background:#30363d;border:0;margin:24px 0}
+ sub,sup{color:#8b949e} details{margin:0 0 16px}
+</style><div class="wrap">
+<p><a target="_blank" rel="noopener noreferrer" href="screenshots/01-hero.jpg"><img src="screenshots/01-hero.jpg" width="100%" alt="Ristorante Stellato — dinner under the stars" style="max-width: 100%;"></a></p>
+<h1 align="center">Ristorante Stellato</h1>
+<p align="center">
+  A full-stack restaurant reservation system with a cinematic front end —<br>
+  a WebGL star field, a real 3D floor plan you pick your table from, and a real admin behind it.
+</p>
+<p align="center">
+  <a href="https://ristorante-stellato-puum.vercel.app" rel="nofollow"><b>Live demo</b></a>
+   · 
+  <a href="docs/features.md">Features</a>
+   · 
+  <a href="docs/architecture.md">Architecture</a>
+   · 
+  <a href="docs/development.md">Run it locally</a>
+</p>
+<p align="center">
+  <a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/b3bfe4b1665897adde4dc99f11283083e1fcb05d4efc8ad703332348dbcdc724/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4e6578742e6a732d31362d3041304130413f7374796c653d666c61742d737175617265266c6f676f3d6e6578742e6a73266c6f676f436f6c6f723d7768697465"><img src="https://camo.githubusercontent.com/b3bfe4b1665897adde4dc99f11283083e1fcb05d4efc8ad703332348dbcdc724/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4e6578742e6a732d31362d3041304130413f7374796c653d666c61742d737175617265266c6f676f3d6e6578742e6a73266c6f676f436f6c6f723d7768697465" data-canonical-src="https://img.shields.io/badge/Next.js-16-0A0A0A?style=flat-square&amp;logo=next.js&amp;logoColor=white" style="max-width: 100%;"></a>
+  <a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/0302774d85136c7328ba39546335ce3f585309fa4c2e1fc3b27578f542100c59/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f52656163742d31392d3041304130413f7374796c653d666c61742d737175617265266c6f676f3d7265616374"><img src="https://camo.githubusercontent.com/0302774d85136c7328ba39546335ce3f585309fa4c2e1fc3b27578f542100c59/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f52656163742d31392d3041304130413f7374796c653d666c61742d737175617265266c6f676f3d7265616374" data-canonical-src="https://img.shields.io/badge/React-19-0A0A0A?style=flat-square&amp;logo=react" style="max-width: 100%;"></a>
+  <a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/5ed8b938eda6d3f3bef026ca49575fbfc06198792753b00b6afd6a3b900f8327/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f547970655363726970742d352e392d3041304130413f7374796c653d666c61742d737175617265266c6f676f3d74797065736372697074266c6f676f436f6c6f723d7768697465"><img src="https://camo.githubusercontent.com/5ed8b938eda6d3f3bef026ca49575fbfc06198792753b00b6afd6a3b900f8327/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f547970655363726970742d352e392d3041304130413f7374796c653d666c61742d737175617265266c6f676f3d74797065736372697074266c6f676f436f6c6f723d7768697465" data-canonical-src="https://img.shields.io/badge/TypeScript-5.9-0A0A0A?style=flat-square&amp;logo=typescript&amp;logoColor=white" style="max-width: 100%;"></a>
+  <a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/4cbf74208b856b0842b08b06f39e1c4a1e3b8728e4b86135f332cf6626879a35/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f54687265652e6a732d723132382d3041304130413f7374796c653d666c61742d737175617265266c6f676f3d74687265652e6a73266c6f676f436f6c6f723d7768697465"><img src="https://camo.githubusercontent.com/4cbf74208b856b0842b08b06f39e1c4a1e3b8728e4b86135f332cf6626879a35/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f54687265652e6a732d723132382d3041304130413f7374796c653d666c61742d737175617265266c6f676f3d74687265652e6a73266c6f676f436f6c6f723d7768697465" data-canonical-src="https://img.shields.io/badge/Three.js-r128-0A0A0A?style=flat-square&amp;logo=three.js&amp;logoColor=white" style="max-width: 100%;"></a>
+  <a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/ad15d22012b281e2ca152fbd59060f7730dab95a80ef0f749735ab3649f7335d/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f475341502d332e31322d3041304130413f7374796c653d666c61742d737175617265266c6f676f3d677265656e736f636b"><img src="https://camo.githubusercontent.com/ad15d22012b281e2ca152fbd59060f7730dab95a80ef0f749735ab3649f7335d/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f475341502d332e31322d3041304130413f7374796c653d666c61742d737175617265266c6f676f3d677265656e736f636b" data-canonical-src="https://img.shields.io/badge/GSAP-3.12-0A0A0A?style=flat-square&amp;logo=greensock" style="max-width: 100%;"></a>
+  <a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/46dc0eb1b61e49047488180d03833b92899a84e7d588a8e2ccac5895c0acc2ef/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4d6f6e676f44422d3041304130413f7374796c653d666c61742d737175617265266c6f676f3d6d6f6e676f6462"><img src="https://camo.githubusercontent.com/46dc0eb1b61e49047488180d03833b92899a84e7d588a8e2ccac5895c0acc2ef/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4d6f6e676f44422d3041304130413f7374796c653d666c61742d737175617265266c6f676f3d6d6f6e676f6462" data-canonical-src="https://img.shields.io/badge/MongoDB-0A0A0A?style=flat-square&amp;logo=mongodb" style="max-width: 100%;"></a>
+  <a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/3840c66fd6e8d5a1b99a6358174259ae42a97a77444b55404a3afe4cf4a13a64/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5669746573742d342e312d3041304130413f7374796c653d666c61742d737175617265266c6f676f3d766974657374"><img src="https://camo.githubusercontent.com/3840c66fd6e8d5a1b99a6358174259ae42a97a77444b55404a3afe4cf4a13a64/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5669746573742d342e312d3041304130413f7374796c653d666c61742d737175617265266c6f676f3d766974657374" data-canonical-src="https://img.shields.io/badge/Vitest-4.1-0A0A0A?style=flat-square&amp;logo=vitest" style="max-width: 100%;"></a>
+  <a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/a8f7c9051227f186889967fd1550ee9029fd7abb9c825d126f419c32cbe8450f/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6c6963656e63652d4d49542d3041304130413f7374796c653d666c61742d737175617265"><img src="https://camo.githubusercontent.com/a8f7c9051227f186889967fd1550ee9029fd7abb9c825d126f419c32cbe8450f/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6c6963656e63652d4d49542d3041304130413f7374796c653d666c61742d737175617265" data-canonical-src="https://img.shields.io/badge/licence-MIT-0A0A0A?style=flat-square" style="max-width: 100%;"></a>
+</p>
+<hr>
+<h2>What it is</h2>
+<p>A reservation system for a fictional Istanbul restaurant, built end to end: guests<br>
+browse, pick a table and book; the restaurant sees every booking in a protected<br>
+dashboard. It is a portfolio project, but not a demo — it runs in production on<br>
+Vercel against MongoDB Atlas, with 53 tests, rate limiting and three languages.</p>
+<p>The point of the project was to find out whether a genuinely cinematic front end<br>
+can sit on top of an ordinary, boring, correct backend without either side<br>
+suffering. The animation work is real Three.js and GSAP, not CSS transitions; the<br>
+backend is Server Actions, Zod validation and NextAuth v5.</p>
+<h2>Three things worth looking at</h2>
+<h3>A 3D floor plan you actually book from</h3>
+<p><a target="_blank" rel="noopener noreferrer" href="screenshots/07-reservation-floorplan.jpg"><img src="screenshots/07-reservation-floorplan.jpg" width="100%" alt="The 3D floor plan in the reservation flow" style="max-width: 100%;"></a></p>
+<p>The reservation flow is four steps — date and time, table, details, confirm — and<br>
+step two is a WebGL model of the dining room. Tables with a lit candle are free,<br>
+dimmed ones are taken, and availability changes with the date and time you picked.<br>
+Selection is raycast against the actual geometry, and the camera moves with each<br>
+step. Availability sits behind a single <code class="notranslate">getAvailability()</code> seam, so swapping the<br>
+mock for live data touches one function.</p>
+<h3>A star field that draws its own constellation</h3>
+<p><a target="_blank" rel="noopener noreferrer" href="screenshots/02-story.jpg"><img src="screenshots/02-story.jpg" width="100%" alt="The story section" style="max-width: 100%;"></a></p>
+<p>The landing page is a layered Three.js star field with mouse parallax, and the<br>
+constellation above the title draws itself as you scroll. Lenis drives smooth<br>
+scrolling and GSAP ScrollTrigger is synchronised to it, so reveals, curtains and<br>
+parallax all run off one timeline instead of fighting each other.</p>
+<p>Under <code class="notranslate">prefers-reduced-motion</code> every WebGL scene and animation is switched off and<br>
+the content is served statically — the site stays fully usable.</p>
+<h3>An admin that earns its keep</h3>
+<p>Behind NextAuth v5 and an unguessable route: statistics, live search, filtering and<br>
+pagination over every reservation. Guests get an email confirmation with a<br>
+personal follow-up link. Requests are rate limited per IP.</p>
+<h2>Screens</h2>
+<markdown-accessiblity-table><table role="table">
+<tbody><tr>
+<td width="50%"><a target="_blank" rel="noopener noreferrer" href="screenshots/03-menu.jpg"><img src="screenshots/03-menu.jpg" width="100%" alt="Menu" style="max-width: 100%;"></a><p align="center"><sub>Menu — filtered by course</sub></p></td>
+<td width="50%"><a target="_blank" rel="noopener noreferrer" href="screenshots/04-cellar.jpg"><img src="screenshots/04-cellar.jpg" width="100%" alt="The cellar" style="max-width: 100%;"></a><p align="center"><sub>The cellar</sub></p></td>
+</tr>
+<tr>
+<td width="50%"><a target="_blank" rel="noopener noreferrer" href="screenshots/05-evening-kitchen.jpg"><img src="screenshots/05-evening-kitchen.jpg" width="100%" alt="The evening" style="max-width: 100%;"></a><p align="center"><sub>The evening, hour by hour</sub></p></td>
+<td width="50%"><a target="_blank" rel="noopener noreferrer" href="screenshots/08-reservation-contact.jpg"><img src="screenshots/08-reservation-contact.jpg" width="100%" alt="Reservation and contact" style="max-width: 100%;"></a><p align="center"><sub>Reservation and contact</sub></p></td>
+</tr>
+</tbody></table></markdown-accessiblity-table>
+<h2>Stack</h2>
+<p><strong>Front end</strong> — Next.js 16 (App Router, React Compiler), React 19, TypeScript strict,<br>
+Tailwind v4 with an "ink &amp; gold" token system, Three.js r128, GSAP 3.12 +<br>
+ScrollTrigger, Lenis, Framer Motion in the admin, Zod 4, a dependency-free i18n<br>
+context (TR / EN / IT), PWA with a service worker.</p>
+<p><strong>Back end</strong> — Next.js Server Actions, NextAuth v5 (credentials), MongoDB with<br>
+Mongoose, Zod schemas, Nodemailer over Gmail SMTP, IP-based rate limiting.</p>
+<p><strong>Testing</strong> — Vitest 4 with jsdom and React Testing Library. 53 unit and<br>
+integration tests across four suites: reservation validation (13), table-selection<br>
+logic (20), admin filtering (15) and rate limiting (5).</p>
+<p>Full breakdown: <a href="docs/architecture.md">Architecture</a>.</p>
+<h2>Run it locally</h2>
+<div class="highlight highlight-source-shell"><pre class="notranslate">git clone https://github.com/BurakErdemci/ristorante-stellato.git
+<span class="pl-c1">cd</span> ristorante-stellato
+npm install
+cp .env.example .env.local     <span class="pl-c"><span class="pl-c">#</span> MongoDB URI, NextAuth secret, SMTP credentials</span>
+npm run dev</pre></div>
+<p>Environment variables, seeding, the admin account and the test commands are in<br>
+<a href="docs/development.md">Local development</a>.</p>
+<h2>Documentation</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="docs/features.md">Features</a></td>
+<td>The complete feature list</td>
+</tr>
+<tr>
+<td><a href="docs/architecture.md">Architecture</a></td>
+<td>Stack breakdown and directory layout</td>
+</tr>
+<tr>
+<td><a href="docs/api.md">Server actions &amp; data model</a></td>
+<td>Action signatures, schema, env vars, auth</td>
+</tr>
+<tr>
+<td><a href="docs/development.md">Local development</a></td>
+<td>Setup, usage and the test suite</td>
+</tr>
+<tr>
+<td><a href="docs/roadmap.md">Roadmap</a></td>
+<td>What is planned next</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h2>Licence</h2>
+<p><a href="LICENSE">MIT</a> © 2026 Burak Emre Erdemci</p></div>
